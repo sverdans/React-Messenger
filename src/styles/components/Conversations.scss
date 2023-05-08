@@ -1,0 +1,16 @@
+.conversation-list-wrapper
+{
+	position: relative;
+
+	.conversation-list 
+	{
+		position: absolute;
+		width: var(--conversation-sidebar-width);
+		
+		display: flex;
+		flex-direction: column;
+		height: calc(100% - var(--header-height));
+		overflow-y: scroll;
+		overflow-x: hidden;
+	}
+}

@@ -1,0 +1,50 @@
+.messenger 
+{
+	width: 100vw;
+	height: 100vh;
+
+	display: grid;
+	grid-template-columns: var(--tools-sidebar-width) var(--conversation-sidebar-width) auto;
+	gap: 1px;
+
+	background: var(--app-background-color);
+
+	.header
+	{
+		display: flex;
+		flex-direction: column;
+
+		justify-content: center;
+		padding: 0 10px;
+
+		background: var(--sidebar-background-color);
+		height: var(--header-height);
+
+		.search-input
+		{
+			background: var(--search-input-background-color);
+			color: var(--search-input-color);
+
+			padding: 8px 10px;
+			border-radius: 10px;
+			border: none;
+			font-size: 14px;
+
+			&::placeholder
+			{
+				color: var(--search-input-placeholder-color);
+
+			}
+
+			&:focus
+			{
+				outline: none;
+
+				&::placeholder
+				{
+					color: var(--search-input-placeholder-focus-color);
+				}
+			}
+		}
+	}
+}

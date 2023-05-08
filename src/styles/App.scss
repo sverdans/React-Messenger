@@ -1,0 +1,29 @@
+@import './components/all.scss';
+@import './themes/all.scss';
+@import './pages/all.scss';
+
+:root
+{
+	--header-height: 56px;
+	--tools-sidebar-width: 50px;
+	--conversation-sidebar-width: 350px;
+
+	body
+	{
+		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+			'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+			sans-serif;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	
+		margin: 0;
+		padding: 0;
+	}
+	
+	.App
+	{
+		background: var(--app-background-color);
+		overflow: hidden;
+	}
+}
+
