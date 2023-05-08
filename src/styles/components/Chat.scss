@@ -7,10 +7,11 @@
 		position: absolute;
 
 		width: 100%;
-		height: calc(100% - var(--header-height));
+		height: calc(100% - var(--header-height) - var(--header-height));
 
 		display: flex;
 		flex-direction: column;
 		overflow-y: scroll;
+		overflow-x: hidden;
 	}
 }

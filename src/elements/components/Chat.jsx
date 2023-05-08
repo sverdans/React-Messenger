@@ -143,9 +143,12 @@ const Chat = (props) =>
 				<input type="search" className="search-input" placeholder="Search"/>
 			</div>
 
-			<div className="message-list-container">{renderMessages()}</div>
-				<Compose rightItems={[ ]}/>
+			<div className="message-list-container">
+				{renderMessages()}
 			</div>
+	
+			<Compose />
+		</div>
 	);
 }
 

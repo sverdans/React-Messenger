@@ -6,3 +6,4 @@ export { default as Message } from "./Message";
 export { default as Compose } from "./Compose";
 
 export { default as ConversationListItem } from "./ConversationListItem";
+export { default as IconButton } from "./IconButton";

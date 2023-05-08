@@ -1,0 +1,20 @@
+.icon-button-wrapper
+{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover
+    {
+        .icon-button
+        {
+            color: var(--icon-button-active-color);
+        }
+    }
+
+    .icon-button
+    {
+        color: var(--icon-button-color);
+    }
+}

@@ -1,9 +1,17 @@
-.message {
+.message 
+{
+    margin: 0 0 0 10px; 
     display: flex;
     flex-direction: column;
 }
 
-.message .timestamp {
+.message.mine
+{
+    margin: 0 10px 0 0; 
+}
+
+.message .timestamp 
+{
     display: flex;
     justify-content: center;
     color: #999;
@@ -13,34 +21,41 @@
     text-transform: uppercase;
 }
 
-.message .bubble-container {
+.message .bubble-container 
+{
     font-size: 14px;
     display: flex;
 }
 
-.message.mine .bubble-container {
+.message.mine .bubble-container 
+{
     justify-content: flex-end;
 }
 
-.message.start .bubble-container .bubble {
+.message.start .bubble-container .bubble 
+{
     border-top-left-radius: 20px;
 }
 
-.message.end .bubble-container .bubble {
+.message.end .bubble-container .bubble 
+{
     border-bottom-left-radius: 20px;
 }
 
-.message.mine.start .bubble-container .bubble {
+.message.mine.start .bubble-container .bubble 
+{
     margin-top: 10px;
     border-top-right-radius: 20px;
 }
 
-.message.mine.end .bubble-container .bubble {
+.message.mine.end .bubble-container .bubble 
+{
     border-bottom-right-radius: 20px;
     margin-bottom: 10px;
 }
 
-.message .bubble-container .bubble {
+.message .bubble-container .bubble 
+{
     margin: 1px 0px;
     background: var(--companion-message-background-color);
     color: var(--message-color);
@@ -53,7 +68,8 @@
     border-bottom-right-radius: 20px;
 }
 
-.message.mine .bubble-container .bubble {
+.message.mine .bubble-container .bubble 
+{
     background: var(--sender-message-background-color);
     color: var(--message-color);
     border-top-left-radius: 20px;

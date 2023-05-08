@@ -1,19 +1,29 @@
-import React from 'react';
+import React from 'react'
+import { IoSend, IoAttach } from 'react-icons/io5'
+import { IconButton } from './index'
 
-const Compose = (props) =>
+const Compose = () =>
 {
-	return (
-		<div className="compose">
-			<input
-			type="text"
-			className="compose-input"
-			placeholder="Type a message, @name"
-			/>
+	const onSendClick = () => { }
+	const onAttachClick = () => { }
 
-			{
-				props.rightItems
-			}
+	return (
+		<div className='compose-wrapper'>
+			<div className="compose">
+				<IconButton onClick={onAttachClick} iconSize="27.5px" color="" activeColor="">
+					<IoAttach />
+				</IconButton>
+
+				<input type="text" 
+					className="compose-input" 
+					placeholder="Write a message..."/>
+
+				<IconButton onClick={onSendClick} iconSize="20px" color="" activeColor="">
+					<IoSend />
+				</IconButton>
+			</div>
 		</div>
+	
 	);
 }
 

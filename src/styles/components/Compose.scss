@@ -1,39 +1,68 @@
-.compose {
-    padding: 10px;
+
+.compose-wrapper
+{
     display: flex;
     align-items: center;
-    background: white;
-    border-top: 1px solid #eeeef1;
-    position: fixed;
-    width: calc(100% - 20px);
-    bottom: 0px;
-}
 
-@supports (backdrop-filter: blur(20px)) {
-    .compose {
-    border: none;
-    background-color: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(20px);
+    background: var(--compose-background-color);
+    border-left: 1px solid var(--app-background-color);
+    position: absolute;
+    bottom: 0px;
+    min-height: var(--header-height);
+    width: 100%;
+    vertical-align: middle;
+    
+    .compose
+    {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 40px auto 40px;
+        padding: 0 10px;
+        gap: 10px;
+
+        .compose-input 
+        {
+            border: none;
+            font-size: 14px;
+            height: 40px;
+            background: none;
+            color: var(--compose-input-color);
+    
+            &::placeholder
+            {
+                color: var(--compose-input-placeholder-color);
+            }
+    
+            &:focus
+            {
+                outline: none;
+    
+                &::placeholder
+                {
+                    color: var(--compose-input-placeholder-focus-color);
+                }
+            }
+        }
     }
 }
 
-.compose-input {
-    flex: 1;
-    border: none;
-    font-size: 14px;
-    height: 40px;
-    background: none;
+@supports (backdrop-filter: blur(20px)) 
+{
+    .compose 
+    {
+        border: none;
+        background-color: var(--compose-background-color);
+        backdrop-filter: blur(20px);
+    }
 }
 
-.compose-input::placeholder {
-    opacity: 0.3;
-}
-
-.compose .toolbar-button {
+.compose .toolbar-button 
+{
     color: #bbbbbf;
     margin-left: 15px;
 }
 
-.compose .toolbar-button:hover {
+.compose .toolbar-button:hover 
+{
     color: #99999c;
 }
