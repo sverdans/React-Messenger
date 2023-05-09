@@ -1,5 +1,5 @@
 import React from 'react';
-import { Conversations, Chat, Sidebar } from '../components';
+import { Conversations, Chat, Sidebar } from '../common';
 
 const Messenger = () => 
 {

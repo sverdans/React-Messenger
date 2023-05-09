@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Compose, ToolbarButton, Message } from './index'
+import { Compose, Message } from './index'
 
 import moment from 'moment';
 
