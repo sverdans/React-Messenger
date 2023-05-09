@@ -1,0 +1,33 @@
+.signin-page
+{
+    background-color: var(--alternate-background-color);
+    color: var(--app-color);
+
+    width: 100vw;
+    height: 100vh;
+
+
+    .signin-form
+    {
+        height: 100%;
+        padding: auto 0;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+
+        .signin-label
+        {
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .signin-button
+        {
+            vertical-align: middle;
+            font-weight: bold;
+            text-transform: none;
+        }
+    }
+}
