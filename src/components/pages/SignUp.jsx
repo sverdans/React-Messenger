@@ -13,27 +13,27 @@ import {
 } from '@mui/material';
 import { Visibility,VisibilityOff }  from '@mui/icons-material'
 import { LoadingButton } from '@mui/lab';
+import { useNavigate } from "react-router-dom";
+
+import user from '../../store/User';
 
 const SignUp = () => 
 {
+	const navigate = useNavigate();
 	const [showPassword, setShowPassword] = React.useState(false)
 	const [loadingButton, setLoadingButton] = React.useState(false)
 
 	const onSubmitClick = async () => 
 	{
-		function sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)) }
-
 		setLoadingButton(true)
-		await sleep(1000)
+
+		
+		navigate("/messenger")
 		setLoadingButton(false)
 	}
 
 	const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-	const handleMouseDownPassword = (event) => 
-	{
-    	event.preventDefault();
-	};
+	const handleMouseDownPassword = (event) => { event.preventDefault() };
 
 	return (
 		<div className='signin-page'>

@@ -6,12 +6,13 @@ import { useMediaQuery } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 import { Messenger, SignIn, SignUp, Settings, Error } from './pages'
+import { check } from '../api/user';
+
 import user from '../store/User'
 
 const App = observer( () => 
 {
 	const theme = useMediaQuery('(prefers-color-scheme: dark)') ? 'dark' : 'light'
-
 	const muiTheme = createTheme({ palette: { mode: theme } });
 
 	return (

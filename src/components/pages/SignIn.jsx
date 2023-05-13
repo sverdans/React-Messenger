@@ -13,9 +13,14 @@ import {
 } from '@mui/material';
 import { Visibility,VisibilityOff }  from '@mui/icons-material'
 import { LoadingButton } from '@mui/lab';
+import { useNavigate } from "react-router-dom";
+
+import user from '../../store/User';
 
 const SignIn = () => 
 {
+	const navigate = useNavigate();
+
 	const [showPassword, setShowPassword] = React.useState(false)
 	const [loadingButton, setLoadingButton] = React.useState(false)
 
@@ -25,6 +30,8 @@ const SignIn = () =>
 
 		setLoadingButton(true)
 		await sleep(1000)
+		user.auth({name: "a", login: "a"})
+		navigate("/messenger")
 		setLoadingButton(false)
 	}
 
