@@ -16,6 +16,7 @@ import { LoadingButton } from '@mui/lab';
 import { useNavigate } from "react-router-dom";
 
 import user from '../../store/User';
+import socket from '../../api'
 
 const SignUp = () => 
 {
@@ -23,11 +24,26 @@ const SignUp = () =>
 	const [showPassword, setShowPassword] = React.useState(false)
 	const [loadingButton, setLoadingButton] = React.useState(false)
 
+	const [name, setName] = React.useState('')
+	const [login, setLogin] = React.useState('')
+	const [email, setEmail] = React.useState('')
+	const [surname, setSurname] = React.useState('')
+	const [password, setPassword] = React.useState('')
+
 	const onSubmitClick = async () => 
 	{
 		setLoadingButton(true)
+		socket.emit("message", { 
+			event: "signup",
+			data: {
+				email,
+				login,
+				name,
+				surname,
+				password
+			}
+		})
 
-		
 		navigate("/messenger")
 		setLoadingButton(false)
 	}
@@ -42,14 +58,40 @@ const SignUp = () =>
 
 					<FormLabel className='signin-label' color='error'>Sign Up</FormLabel>
 
-					<TextField id="standard-basic" label="Email" variant="standard" />
+					<TextField 
+						id="standard-basic" 
+						label="Email" 
+						variant="standard" 
+						value={email} 
+						onChange={e => setEmail(e.target.value)}/>
 					
-					<TextField id="standard-basic" label="Name" variant="standard" style={{ marginTop: 20 }} />
+					<TextField 
+						id="standard-basic" 
+						label="Login" 
+						variant="standard" 
+						style={{ marginTop: 20 }}
+						value={login} 
+						onChange={e => setLogin(e.target.value)}/>
 
-					<TextField id="standard-basic" label="Surname" variant="standard" style={{ marginTop: 20 }} />
+					<TextField 
+						id="standard-basic"
+						label="Name"
+						variant="standard"
+						style={{ marginTop: 20 }}
+						value={name} 
+						onChange={e => setName(e.target.value)}/>
+
+					<TextField 
+						id="standard-basic"
+						label="Surname"
+						variant="standard"
+						style={{ marginTop: 20 }} 
+						value={surname} 
+						onChange={e => setSurname(e.target.value)}/>
 
 					<FormControl variant="standard" style={{ marginTop: 20 }}>
 						<InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+						
 						<Input
 							id="standard-adornment-password"
 							type={showPassword ? 'text' : 'password'}
@@ -68,7 +110,8 @@ const SignUp = () =>
 									</IconButton>
 								</InputAdornment>
 							}
-						/>
+							value={password}
+							onChange={e => setPassword(e.target.value)}/>
 					</FormControl>
 
 					<LoadingButton

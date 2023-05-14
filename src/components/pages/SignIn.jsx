@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import { 
 	Container,
 	Button,
@@ -10,12 +10,13 @@ import {
 	FormLabel,
 	TextField,
 	Link,
-} from '@mui/material';
+} from '@mui/material'
 import { Visibility,VisibilityOff }  from '@mui/icons-material'
-import { LoadingButton } from '@mui/lab';
-import { useNavigate } from "react-router-dom";
+import { LoadingButton } from '@mui/lab'
+import { useNavigate } from "react-router-dom"
 
-import user from '../../store/User';
+import user from '../../store/User'
+import socket from '../../api'
 
 const SignIn = () => 
 {
@@ -24,13 +25,20 @@ const SignIn = () =>
 	const [showPassword, setShowPassword] = React.useState(false)
 	const [loadingButton, setLoadingButton] = React.useState(false)
 
+	const [email, setEmail] = React.useState('')
+	const [password, setPassword] = React.useState('')
+
 	const onSubmitClick = async () => 
 	{
 		function sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)) }
 
 		setLoadingButton(true)
 		await sleep(1000)
-		user.auth({name: "a", login: "a"})
+
+		socket.emit("message", { 
+			event: "signin",
+			data: { email, password }
+		})
 		navigate("/messenger")
 		setLoadingButton(false)
 	}
@@ -49,10 +57,16 @@ const SignIn = () =>
 
 					<FormLabel className='signin-label' color='error'>Sign In</FormLabel>
 
-					<TextField id="standard-basic" label="Email" variant="standard" />
+					<TextField 
+						id="standard-basic" 
+						label="Email" 
+						variant="standard" 
+						value={email} 
+						onChange={e => setEmail(e.target.value)}/>
 					
 					<FormControl variant="standard" style={{ marginTop: 20 }}>
 						<InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+						
 						<Input
 							id="standard-adornment-password"
 							type={showPassword ? 'text' : 'password'}
@@ -71,7 +85,8 @@ const SignIn = () =>
 									</IconButton>
 								</InputAdornment>
 							}
-						/>
+							value={password}
+							onChange={e => setPassword(e.target.value)}/>
 					</FormControl>
 
 					<LoadingButton loading={loadingButton}

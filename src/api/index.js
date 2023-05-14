@@ -1,3 +1,13 @@
+import { io } from 'socket.io-client';
+
+const socket = io(process.env.REACT_APP_API_KEY, { autoConnect: true });
+
+socket.onAny((event, ...args) => { console.log(event, args) });
+
+export default socket;
+
+
+/*
 const wsConnection = new WebSocket(process.env.REACT_APP_API_KEY);
 
 wsConnection.onopen = function() 
@@ -13,7 +23,7 @@ wsConnection.onclose = (event) =>
 	else 
         console.log("[warning]", "WebSocket connection closed")
    
-    alert('Код: ' + event.code + ' причина: ' + event.reason);
+    console.log("[warning]", 'Код: ' + event.code + ' причина: ' + event.reason)
 }
 
 wsConnection.onerror = (error) => 
@@ -32,3 +42,5 @@ const wsSend = (data) =>
 }
 
 export { wsConnection, wsSend }
+
+*/
