@@ -28,19 +28,30 @@ const SignIn = () =>
 	const [email, setEmail] = React.useState('')
 	const [password, setPassword] = React.useState('')
 
+	const onServerResponse = (res) => 
+	{
+		console.log('[debug]', 'server response', res)
+				
+		if (res.status !== 200)
+		{
+			alert("В поле " + res.id + " ошибка: " + res.info)
+			setLoadingButton(false)
+			return
+		}
+		
+		user.auth(res.data.jwt)
+		setLoadingButton(false)
+		navigate("/messenger")
+	}
+
 	const onSubmitClick = async () => 
 	{
-		function sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)) }
-
 		setLoadingButton(true)
-		await sleep(1000)
-
 		socket.emit("message", { 
 			event: "signin",
-			data: { email, password }
-		})
-		navigate("/messenger")
-		setLoadingButton(false)
+			data: { email, password }},
+			onServerResponse
+		)
 	}
 
 	const handleClickShowPassword = () => setShowPassword((show) => !show);

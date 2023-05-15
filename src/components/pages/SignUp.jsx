@@ -13,7 +13,8 @@ import {
 } from '@mui/material';
 import { Visibility,VisibilityOff }  from '@mui/icons-material'
 import { LoadingButton } from '@mui/lab';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
 
 import user from '../../store/User';
 import socket from '../../api'
@@ -30,22 +31,30 @@ const SignUp = () =>
 	const [surname, setSurname] = React.useState('')
 	const [password, setPassword] = React.useState('')
 
+	const onServerResponse = (res) => 
+	{
+		console.log('[debug]', 'server response', res)
+				
+		if (res.status !== 200)
+		{
+			alert("В поле " + res.id + " ошибка: " + res.info)
+			setLoadingButton(false)
+			return
+		}
+		
+		user.auth(res.data.jwt)
+		setLoadingButton(false)
+		navigate("/messenger")
+	}
+
 	const onSubmitClick = async () => 
 	{
 		setLoadingButton(true)
 		socket.emit("message", { 
 			event: "signup",
-			data: {
-				email,
-				login,
-				name,
-				surname,
-				password
-			}
-		})
-
-		navigate("/messenger")
-		setLoadingButton(false)
+			data: { email, login, name, surname, password }},
+			onServerResponse
+		)
 	}
 
 	const handleClickShowPassword = () => setShowPassword((show) => !show);

@@ -1,5 +1,6 @@
 
 import { makeAutoObservable } from "mobx";
+import jwt_decode from 'jwt-decode';
 
 class User
 {
@@ -10,15 +11,10 @@ class User
         makeAutoObservable(this)
     }
 
-    signIn(user)
+    auth(jwt)
     {
-        this.user = user
-        console.log(this.user)
-    }
-
-    signUp()
-    {
-        this.user = {}
+        this.user = jwt_decode(jwt)
+        console.log('[debug]', 'user new state:', this.user)
     }
 
     check()
