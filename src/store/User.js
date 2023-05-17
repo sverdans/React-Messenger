@@ -6,22 +6,19 @@ class User
 {
     user = {}
 
-    constructor() 
-    {
-        makeAutoObservable(this)
-    }
+    constructor() { makeAutoObservable(this) }
 
     auth(jwt)
     {
-        this.user = jwt_decode(jwt)
-        console.log('[debug]', 'user new state:', this.user)
+        const user = jwt_decode(jwt) 
+        this.user = user
+        console.log('[debug]', 'user new state:', user)
     }
 
     check()
     {
         
     }
-
 
     get isAuth()
     {

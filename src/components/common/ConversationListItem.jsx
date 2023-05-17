@@ -25,22 +25,25 @@ const stringToColor = (string) =>
 const stringAvatar = (name) => 
 {
 	return {
-	//	sx: { bgcolor: stringToColor(name) },
+		sx: { bgcolor: stringToColor(name) },
 		children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
 	};
 }
 
-const ConversationListItem = (props) => 
+const ConversationListItem = ({user}) => 
 {
-	const { photo, name, text } = props.data;
+	const text = "Hello world!"
+
+	console.log(user);
+	const fullName = user.name + ' ' + user.surname
 
 	return (
 	<div className="conversation-list-item">
 		<div className="conversation-list-item-inner">
-			<Avatar sx={{ width: 50, height: 50 }} src={photo} {...stringAvatar(name)}/>
+			<Avatar sx={{ width: 50, height: 50 }} src={user.image} {...stringAvatar(fullName)}/>
 			
 			<div className="conversation-info">
-				<h1 className="conversation-title">{ name }</h1>
+				<h1 className="conversation-title">{ fullName }</h1>
 				<p className="conversation-snippet">{ text }</p>
 			</div>
 		</div>

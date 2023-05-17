@@ -1,12 +1,11 @@
 import React from 'react'
-import { Routes, Route, Navigate } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
+import { Routes, Route, Navigate } from 'react-router-dom'
 
 import { useMediaQuery } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 import { Messenger, SignIn, SignUp, Settings, Error } from './pages'
-import { check } from '../api/user';
 
 import user from '../store/User'
 

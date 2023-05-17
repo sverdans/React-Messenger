@@ -2,24 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { ConversationListItem } from './index';
 import axios from 'axios';
 
-const Conversations = (props) => 
+const Conversations = ({ contacts }) => 
 {
-	const [conversations, setConversations] = useState([]);
-	useEffect(() => { getConversations() },[])
+	console.log(contacts.users)
 
-	const getConversations = () => 
-	{
-		axios.get('https://randomuser.me/api/?results=20').then(response => {
-			let newConversations = response.data.results.map(result => {
-			return {
-				photo: result.picture.large,
-				name: `${result.name.first} ${result.name.last}`,
-				text: 'Hello world! This is a long message that needs to be truncated.'
-			};
-			});
-			setConversations([...conversations, ...newConversations])
-		});
-	}
+	const users =  Object.entries(contacts.users).map(user => ({
+		name: user[1].name,
+		surname: user[1].surname,
+		image: user[1].image,
+		id: user[1].id
+	}))
+	
+	console.log(users)
 
 	return (
 		<div className="conversation-list-wrapper">
@@ -30,10 +24,10 @@ const Conversations = (props) =>
 
 			<div className="conversation-list scrollable">
 				{
-					conversations.map(conversation =>
+					users.map(user =>
 						<ConversationListItem
-						key={conversation.name}
-						data={conversation}
+						key={user.id}
+						user={user}
 						/>
 					)
 				}

@@ -20,7 +20,7 @@ import socket from '../../api'
 
 const SignIn = () => 
 {
-	const navigate = useNavigate();
+	const navigate = useNavigate()
 
 	const [showPassword, setShowPassword] = React.useState(false)
 	const [loadingButton, setLoadingButton] = React.useState(false)
@@ -32,16 +32,21 @@ const SignIn = () =>
 	{
 		console.log('[debug]', 'server response', res)
 				
-		if (res.status !== 200)
+		if (res.status === 200)
+		{
+			user.auth(res.data.jwt)
+			setLoadingButton(false)
+			navigate("/messenger")
+		}
+		else if (res.status === 400)
 		{
 			alert("В поле " + res.id + " ошибка: " + res.info)
 			setLoadingButton(false)
-			return
 		}
-		
-		user.auth(res.data.jwt)
-		setLoadingButton(false)
-		navigate("/messenger")
+		else
+		{
+			alert("server internal error: " + res.info)
+		}
 	}
 
 	const onSubmitClick = async () => 
@@ -54,12 +59,9 @@ const SignIn = () =>
 		)
 	}
 
-	const handleClickShowPassword = () => setShowPassword((show) => !show);
+	const handleClickShowPassword = () => setShowPassword((show) => !show)
 
-	const handleMouseDownPassword = (event) => 
-	{
-    	event.preventDefault();
-	};
+	const handleMouseDownPassword = (event) => { event.preventDefault() }
 
 	return (
 		<div className='signin-page'>
