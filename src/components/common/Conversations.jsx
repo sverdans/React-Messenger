@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { ConversationListItem } from './index';
 import axios from 'axios';
 
+import user from '../../store/User'
+
 const Conversations = ({ contacts }) => 
 {
 	console.log(contacts.users)
@@ -24,10 +26,11 @@ const Conversations = ({ contacts }) =>
 
 			<div className="conversation-list scrollable">
 				{
-					users.map(user =>
+					users.map(contact =>
+						user.user.id !== contact.id &&
 						<ConversationListItem
-						key={user.id}
-						user={user}
+							key={contact.id}
+							user={contact}
 						/>
 					)
 				}
