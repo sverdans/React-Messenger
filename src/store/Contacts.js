@@ -8,12 +8,15 @@ class Contacts
 
     connected(user)
     {
-        console.log('[debug]', "contacts add new user:", user)
+        console.log('[debug]', "contacts online:", user)
+        user.online = true;
         this.users[user.id] = user
     }
 
     disconnected(user)
     {
+        console.log('[debug]', "contacts online:", user)
+        user.online = false;
         this.users[user.id] = user
     }
 

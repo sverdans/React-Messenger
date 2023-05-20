@@ -7,3 +7,4 @@ export { default as Compose } from "./Compose";
 
 export { default as ConversationListItem } from "./ConversationListItem";
 export { default as IconButton } from "./IconButton";
+export { default as ContactCard } from "./ContactCard";
