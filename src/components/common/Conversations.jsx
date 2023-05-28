@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { observer } from 'mobx-react-lite'
-import { ConversationListItem } from './index';
 
-import user from '../../store/User'
-import contacts from '../../store/Contacts'
+import { ChatCard } from 'components/common';
+import user from 'store/User'
+import contacts from 'store/Contacts'
 
 const Conversations =  observer( () => 
 {
@@ -28,11 +28,7 @@ const Conversations =  observer( () =>
 				{
 					users.map(contact =>
 						user.user.id !== contact.id &&
-						<ConversationListItem
-							key={contact.id}
-							user={contact}
-						/>
-					)
+						<ChatCard key={contact.id} user={contact} />)
 				}
 			</div>
 		</div>

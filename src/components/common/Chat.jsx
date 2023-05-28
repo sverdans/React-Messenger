@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Compose, Message } from './index'
+import React from 'react';
+import { Compose, Message } from 'components/common'
 
 import moment from 'moment';
 
@@ -7,9 +7,9 @@ const MY_USER_ID = 'apple';
 
 const Chat = (props) =>
 {
-	const [messages, setMessages] = useState([])
+	const [messages, setMessages] = React.useState([])
 
-	useEffect(() => { getMessages(); }, [])
+	React.useEffect(() => { getMessages(); }, [])
 
 	const getMessages = () => 
 	{

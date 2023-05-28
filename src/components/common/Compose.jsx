@@ -1,6 +1,6 @@
 import React from 'react'
 import { IoSend, IoAttach } from 'react-icons/io5'
-import { IconButton } from './index'
+import { IconButton } from 'components/common'
 
 const Compose = () =>
 {

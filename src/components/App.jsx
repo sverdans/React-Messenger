@@ -5,11 +5,11 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import { useMediaQuery } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
-import { Messenger, SignIn, SignUp, Settings, Error } from './pages'
+import { Messenger, SignIn, SignUp, Settings, Error } from 'components/pages'
 
-import user from '../store/User'
+import user from 'store/User'
 
-const App = observer( () => 
+const App = observer(() => 
 {
 	const theme = useMediaQuery('(prefers-color-scheme: dark)') ? 'dark' : 'light'
 	const muiTheme = createTheme({ palette: { mode: theme } });

@@ -11,8 +11,10 @@ socket.on('message', ({ event, data }) =>
     switch (event)
     {
         case 'allUsers': contacts.init(data.users); break;
-        case 'online': contacts.connected(data.user); break;
-        case 'offline': contacts.disconnected(data.user); break;
+        case 'online':   contacts.connected(data.user); break;
+        case 'offline':  contacts.disconnected(data.user); break;
+        case 'userChats': break;
+        default: break;
     }
 })
 

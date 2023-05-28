@@ -1,9 +1,8 @@
 import React from 'react'
-import { observer } from 'mobx-react-lite'
-import { Conversations, Chat, Sidebar } from '../common';
+import { Conversations, Chat, Sidebar } from 'components/common'
 
 
-const Messenger = observer( () => 
+const Messenger = () => 
 {
 	return (
 	<div className="messenger">
@@ -12,6 +11,6 @@ const Messenger = observer( () =>
 		<Chat />
 	</div>
 	);
-})
+}
 
 export default Messenger

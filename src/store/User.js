@@ -1,6 +1,5 @@
-
-import { makeAutoObservable } from "mobx";
-import jwt_decode from 'jwt-decode';
+import { makeAutoObservable } from "mobx"
+import jwt_decode from 'jwt-decode'
 
 class User
 {

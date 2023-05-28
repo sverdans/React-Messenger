@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx'
 
 class Chats
 {
-    chats = []
+    chats = {}
 
     constructor() { makeAutoObservable(this) }
 

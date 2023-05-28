@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Container, Button } from '@mui/material';
+import { Container, Button } from '@mui/material'
 
 const Error = () => 
 {

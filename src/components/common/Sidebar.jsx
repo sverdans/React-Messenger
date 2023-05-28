@@ -3,11 +3,12 @@ import { IoSettingsSharp, IoPerson, IoPeople } from 'react-icons/io5'
 import { Modal, Box } from '@mui/material';
 import { observer } from 'mobx-react-lite'
 
-import { IconButton, ContactCard } from './index'
-import contacts from '../../store/Contacts';
-import user from '../../store/User';
+import { IconButton, ContactCard } from 'components/common'
 
-const Sidebar =  observer( () =>
+import contacts from 'store/Contacts';
+import user from 'store/User';
+
+const Sidebar =  observer(() =>
 {
 	const [open, setOpen] = React.useState(false);
 	const handleOpen = () => setOpen(true);
