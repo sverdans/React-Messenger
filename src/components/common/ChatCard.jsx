@@ -1,5 +1,6 @@
-import React from 'react';
-import { UserAvatar } from 'components/common';
+import React from 'react'
+import { Button } from '@mui/material'
+import { UserAvatar } from 'components/common'
 
 const CharCard = ({user}) => 
 {
@@ -9,17 +10,17 @@ const CharCard = ({user}) =>
 	const fullName = user.name + ' ' + user.surname
 
 	return (
-	<div className="conversation-list-item">
-		<div className="conversation-list-item-inner">
+		<Button m={0} p={0} sx={{borderRadius: 0}} className="chat-card">
+			<div className="chat-card-inner">
 
-			<UserAvatar user={user} size={50} />
-			
-			<div className="conversation-info">
-				<h1 className="conversation-title">{ fullName }</h1>
-				<p className="conversation-snippet">{ text }</p>
+				<UserAvatar user={user} size={50} />
+				
+				<div className="conversation-info">
+					<h1 className="conversation-title">{ fullName }</h1>
+					<p className="conversation-snippet">{ text }</p>
+				</div>
 			</div>
-		</div>
-	</div>
+		</Button>
 	);
 }
 

@@ -1,12 +1,15 @@
 import React from 'react'
-import { IoSettingsSharp, IoPerson, IoPeople } from 'react-icons/io5'
-import { Modal, Box } from '@mui/material';
 import { observer } from 'mobx-react-lite'
+import { Stack, Modal, Box, IconButton } from '@mui/material'
 
-import { IconButton, ContactCard } from 'components/common'
+import GroupIcon from '@mui/icons-material/Group'
+import PersonIcon from '@mui/icons-material/Person'
+import SettingsIcon from '@mui/icons-material/Settings'
 
-import contacts from 'store/Contacts';
-import user from 'store/User';
+import { ContactCard } from 'components/common'
+
+import contacts from 'store/Contacts'
+import user from 'store/User'
 
 const Sidebar =  observer(() =>
 {
@@ -23,60 +26,40 @@ const Sidebar =  observer(() =>
 	}))
 
 	return (
-		<div className="sidebar-wrapper">
-			<div className="sidebar">
-				<div className='sidebar-button'>
-					<IconButton iconSize="20px">
-						<IoPerson />
-					</IconButton>
-				</div>
+		<Stack m={0} p={0} width={50} height={'100vh'} alignItems="center" justifyContent="center" >
+			<IconButton>
+				<PersonIcon />
+			</IconButton>
+			
+			<IconButton onClick={handleOpen}>
+				<GroupIcon />
+			</IconButton>
+			
+			<IconButton>
+				<SettingsIcon />
+			</IconButton>
 
-				<div className='sidebar-button'>
-					<IconButton iconSize="22px" onClick={handleOpen}>
-						<IoPeople />
-					</IconButton>
 
-					<Modal
-						open={open}
-						onClose={handleClose}
-						aria-labelledby="modal-modal-title"
-						aria-describedby="modal-modal-description"
-					>
-						<Box className="modal-wrapper" sx={{bgcolor: 'rgb(23,33,43)', color:'rgb(245,245,245)'}}>
-							<div className='modal'>
-								<div className='modal-header'>
+			<Modal open={open} onClose={handleClose}>
+				<Box className="modal-wrapper" sx={{bgcolor: 'rgb(23,33,43)', color:'rgb(245,245,245)'}}>
+					<div className='modal'>
+						<div className='modal-header'>
+						</div>
+						
+						<Stack m={0} p={0} width={1}>
+							{
+								users.map(contact =>
+									user.user.id !== contact.id &&
+									<ContactCard key={contact.id} user={contact} />)
+							}
+						</Stack>
 
-								</div>
-								
-								<div className='modal-body'>
-								{
-									users.map(contact =>
-										user.user.id !== contact.id &&
-										<ContactCard
-											key={contact.id}
-											user={contact}
-										/>
-									)
-								}
-								</div>
-								
-								<div className='modal-footer'>
-									
-								</div>
-							</div>
-							
-						</Box>
-					</Modal>
-
-				</div>
-
-				<div className='sidebar-button'>
-					<IconButton iconSize="20px">
-						<IoSettingsSharp />
-					</IconButton>
-				</div>
-			</div>
-		</div>
+						<div className='modal-footer'>
+						</div>
+					</div>
+				</Box>
+			</Modal>
+		</Stack>
 	);
 })
 

@@ -1,4 +1,7 @@
-import React from 'react';
+import React from 'react'
+import { Container, Grid, FormControl, Input, InputAdornment, Stack, Box } from '@mui/material'
+import SearchIcon from '@mui/icons-material/Search'
+
 import { Compose, Message } from 'components/common'
 
 import moment from 'moment';
@@ -138,17 +141,23 @@ const Chat = (props) =>
 	}
 
 	return(
-		<div className="chat">
-			<div className="header">
-				<input type="search" className="search-input" placeholder="Search"/>
-			</div>
-
-			<div className="message-list-container">
+		<Stack>
+			<Box height={50} display={'flex'} alignItems={'center'}>
+				<FormControl fullWidth m={0} p={0} variant="standard">
+					<Input placeholder='Search' disableUnderline startAdornment={
+						<InputAdornment position="start">
+							<SearchIcon />
+						</InputAdornment>}/>
+				</FormControl>
+			</Box>
+		
+			<Box>
 				{renderMessages()}
-			</div>
-	
+			</Box>
+
 			<Compose />
-		</div>
+
+		</Stack>
 	);
 }
 

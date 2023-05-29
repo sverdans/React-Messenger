@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react'
 import { observer } from 'mobx-react-lite'
+import { Box, FormControl, Input, InputAdornment, Stack } from '@mui/material'
+import SearchIcon from '@mui/icons-material/Search'
 
-import { ChatCard } from 'components/common';
+import { ChatCard } from 'components/common'
 import user from 'store/User'
 import contacts from 'store/Contacts'
 
@@ -18,20 +20,25 @@ const Conversations =  observer( () =>
 	}))
 
 	return (
-		<div className="conversation-list-wrapper">
-			
-			<div className="header">
-				<input type="search" className="search-input" placeholder="Search"/>
-			</div>
+		<Box m={0} p={0} width={300}>
+			<Box height={50} display={'flex'} alignItems={'center'}>
+				<FormControl fullWidth m={0} p={0}>
+					<Input placeholder='Search' disableUnderline startAdornment={
+						<InputAdornment position="start">
+							<SearchIcon />
+						</InputAdornment>}/>
+				</FormControl>
+			</Box>
 
-			<div className="conversation-list scrollable">
+			<Stack m={0} p={0} width={1}>
 				{
 					users.map(contact =>
 						user.user.id !== contact.id &&
 						<ChatCard key={contact.id} user={contact} />)
 				}
-			</div>
-		</div>
+			</Stack>
+
+		</Box>
 	);
 })
 

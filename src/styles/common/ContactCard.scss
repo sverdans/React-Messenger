@@ -2,15 +2,7 @@
 {
 	display: flex;
 	align-items: center;
-	padding: 9px;
-	background: var(--sidebar-background-color);
 	width: auto;
-
-	&:hover
-	{
-		background: var(--sidebar-background-hover-color);
-		cursor: pointer;
-	}
 
 	.contact-card-inner
 	{

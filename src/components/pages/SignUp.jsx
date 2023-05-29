@@ -15,7 +15,7 @@ import { Visibility,VisibilityOff }  from '@mui/icons-material'
 import { LoadingButton } from '@mui/lab';
 import { useNavigate } from 'react-router-dom';
 
-import user from '.store/User';
+import user from 'store/User';
 import socket from 'api'
 
 const SignUp = () => 

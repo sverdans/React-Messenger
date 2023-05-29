@@ -1,19 +1,19 @@
-import React, {useEffect} from 'react';
-import { UserAvatar } from 'components/common';
+import React from 'react'
+import { Button } from '@mui/material'
+
+import { UserAvatar } from 'components/common'
 
 const ContactCard = ({user}) => 
 {
-	console.log(user);
-	
 	const fullName = user.name + ' ' + user.surname
 
 	return (
-	<div className="contact-card">
-		<div className="contact-card-inner">
-			<UserAvatar size={50} user={user}/>
-			<div className="contact-card-info">{ fullName }</div>
-		</div>
-	</div>
+		<Button m={0} p={0} sx={{borderRadius: 0}} className="contact-card">
+			<div className="contact-card-inner">
+				<UserAvatar user={user} size={50} />
+				<div className="contact-card-info">{ fullName }</div>
+			</div>
+		</Button>
 	);
 }
 
