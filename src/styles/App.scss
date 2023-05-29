@@ -4,10 +4,6 @@
 
 :root
 {
-	--header-height: 56px;
-	--tools-sidebar-width: 50px;
-	--conversation-sidebar-width: 350px;
-	
 	body
 	{
 		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -23,7 +19,6 @@
 	.App
 	{
 		background: var(--app-background-color);
-		overflow: hidden;
 	}
 }
 

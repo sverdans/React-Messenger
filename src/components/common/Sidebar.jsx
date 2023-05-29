@@ -39,20 +39,21 @@ const Sidebar =  observer(() =>
 				<SettingsIcon />
 			</IconButton>
 
-
 			<Modal open={open} onClose={handleClose}>
 				<Box className="modal-wrapper" sx={{bgcolor: 'rgb(23,33,43)', color:'rgb(245,245,245)'}}>
 					<div className='modal'>
 						<div className='modal-header'>
 						</div>
 						
-						<Stack m={0} p={0} width={1}>
+						<Box>						
+							<Stack m={0} p={0} width={1}>
 							{
 								users.map(contact =>
 									user.user.id !== contact.id &&
 									<ContactCard key={contact.id} user={contact} />)
 							}
-						</Stack>
+							</Stack>
+						</Box>
 
 						<div className='modal-footer'>
 						</div>
