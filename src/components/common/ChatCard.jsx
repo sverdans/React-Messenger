@@ -12,9 +12,7 @@ const CharCard = ({user}) =>
 	return (
 		<Button m={0} p={0} sx={{borderRadius: 0}} className="chat-card">
 			<div className="chat-card-inner">
-
 				<UserAvatar user={user} size={50} />
-				
 				<div className="conversation-info">
 					<h1 className="conversation-title">{ fullName }</h1>
 					<p className="conversation-snippet">{ text }</p>

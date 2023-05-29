@@ -20,7 +20,7 @@ const Conversations =  observer( () =>
 	}))
 
 	return (
-		<Box m={0} p={0} width={300}>
+		<Box m={0} p={0} width={300} position={'relative'}>
 			<Box height={50} display={'flex'} alignItems={'center'}>
 				<FormControl fullWidth m={0} p={0}>
 					<Input placeholder='Search' disableUnderline startAdornment={
@@ -30,14 +30,15 @@ const Conversations =  observer( () =>
 				</FormControl>
 			</Box>
 
-			<Stack m={0} p={0} width={1}>
-				{
-					users.map(contact =>
-						user.user.id !== contact.id &&
-						<ChatCard key={contact.id} user={contact} />)
-				}
-			</Stack>
-
+			<Box m={0} p={0} maxHeight={'calc(100vh - 50px)'} overflow={'auto'}>
+				<Stack m={0} p={0} width={1} className='chat-cards-list'>
+					{
+						users.map(contact =>
+							user.user.id !== contact.id &&
+							<ChatCard key={contact.id} user={contact} />)
+					}
+				</Stack>
+			</Box>
 		</Box>
 	);
 })

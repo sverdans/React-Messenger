@@ -1,4 +1,7 @@
 import React from 'react'
+import { FormControl, Input, IconButton, Box } from '@mui/material'
+import SendIcon from '@mui/icons-material/Send'
+import AttachFileIcon from '@mui/icons-material/AttachFile'
 
 const Compose = () =>
 {
@@ -6,18 +9,19 @@ const Compose = () =>
 	const onAttachClick = () => { }
 
 	return (
-		<div className='compose-wrapper'>
-			<div className="compose">
-				
+		<Box height={50} display={'flex'} justifyContent={'center'} alignItems={'center'} gap={20}>
+			<IconButton>
+				<AttachFileIcon />
+			</IconButton>
 
-				<input type="text" 
-					className="compose-input" 
-					placeholder="Write a message..."/>
+			<FormControl fullWidth m={0} p={0} variant="standard">
+				<Input placeholder='Write a message...' disableUnderline />
+			</FormControl>
 
-				
-			</div>
-		</div>
-	
+			<IconButton>
+				<SendIcon />
+			</IconButton>
+		</Box>
 	);
 }
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Grid, FormControl, Input, InputAdornment, Stack, Box } from '@mui/material'
+import { List, FormControl, Input, InputAdornment, Stack, Box } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 
 import { Compose, Message } from 'components/common'
@@ -141,7 +141,8 @@ const Chat = (props) =>
 	}
 
 	return(
-		<Stack>
+		
+		<Stack maxHeight={'100%'}>
 			<Box height={50} display={'flex'} alignItems={'center'}>
 				<FormControl fullWidth m={0} p={0} variant="standard">
 					<Input placeholder='Search' disableUnderline startAdornment={
@@ -151,8 +152,10 @@ const Chat = (props) =>
 				</FormControl>
 			</Box>
 		
-			<Box>
-				{renderMessages()}
+			<Box m={0} p={0} maxHeight={'calc(100vh - 100px)'} overflow={'auto'}>
+				<List>
+					{renderMessages()}
+				</List>
 			</Box>
 
 			<Compose />
