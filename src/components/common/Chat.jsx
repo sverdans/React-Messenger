@@ -141,15 +141,16 @@ const Chat = (props) =>
 	}
 
 	return(
-		
 		<Stack height={'100%'} maxHeight={'100vh'}>
-			<Box height={50} display={'flex'} alignItems={'center'}>
-				<FormControl fullWidth m={0} p={0} variant="standard">
+			<Box height={50} display={'flex'} alignItems={'center'} justifyContent={'center'}>
+				
+				<FormControl fullWidth m={0} p={0} variant="standard" backgroundColor={"background.main"}>
 					<Input placeholder='Search' disableUnderline startAdornment={
 						<InputAdornment position="start">
 							<SearchIcon />
 						</InputAdornment>}/>
 				</FormControl>
+			
 			</Box>
 		
 			<Box m={0} p={0} maxHeight={'calc(100% - 100px)'} overflow={'auto'}>

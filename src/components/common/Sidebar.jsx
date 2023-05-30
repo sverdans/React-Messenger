@@ -26,7 +26,8 @@ const Sidebar =  observer(() =>
 	}))
 
 	return (
-		<Stack m={0} p={0} width={50} height={'100vh'} alignItems="center" justifyContent="center" >
+		<Stack m={0} p={0} width={50} height={'100vh'} bgcolor="background.alternate"
+			alignItems="center" justifyContent="center" sx={{ borderRight: 1, borderColor: 'background.main' }}>
 			<IconButton>
 				<PersonIcon />
 			</IconButton>

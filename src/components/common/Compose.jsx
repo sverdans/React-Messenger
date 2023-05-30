@@ -9,7 +9,7 @@ const Compose = () =>
 	const onAttachClick = () => { }
 
 	return (
-		<Box height={50} display={'flex'} justifyContent={'center'} alignItems={'center'} gap={20}>
+		<Box height={50} display={'flex'} justifyContent={'center'} alignItems={'center'} gap={20} bgcolor="background.alternate">
 			<IconButton>
 				<AttachFileIcon />
 			</IconButton>

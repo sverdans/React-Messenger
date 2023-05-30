@@ -20,7 +20,8 @@ const Conversations =  observer( () =>
 	}))
 
 	return (
-		<Box m={0} p={0} width={300} position={'relative'}>
+		<Box m={0} p={0} width={300} position={'relative'} height={'100vh'} 
+		bgcolor="background.alternate" sx={{ borderRight: 1, borderColor: 'background.main' }}>
 			<Box height={50} display={'flex'} alignItems={'center'}>
 				<FormControl fullWidth m={0} p={0}>
 					<Input placeholder='Search' disableUnderline startAdornment={

@@ -10,7 +10,7 @@ const CharCard = ({user}) =>
 	const fullName = user.name + ' ' + user.surname
 
 	return (
-		<Button m={0} p={0} sx={{borderRadius: 0}} className="chat-card">
+		<Button m={0} p={0} sx={{borderRadius: 0}} className="chat-card" color="info">
 			<div className="chat-card-inner">
 				<UserAvatar user={user} size={50} />
 				<div className="conversation-info">

@@ -1,21 +1,21 @@
-import React from 'react';
+import React from 'react'
 import { 
-	Container,
-	Button,
-	IconButton,
+	Box,
+	Stack,
 	Input,
+	IconButton,
 	InputLabel,
 	InputAdornment,
 	FormControl,
-	FormLabel,
+	Typography,
 	TextField,
 	Link,
-} from '@mui/material';
+} from '@mui/material'
 import { Visibility,VisibilityOff }  from '@mui/icons-material'
-import { LoadingButton } from '@mui/lab';
-import { useNavigate } from 'react-router-dom';
+import { LoadingButton } from '@mui/lab'
+import { useNavigate } from 'react-router-dom'
 
-import user from 'store/User';
+import user from 'store/User'
 import socket from 'api'
 
 const SignUp = () => 
@@ -65,83 +65,73 @@ const SignUp = () =>
 	const handleMouseDownPassword = (event) => { event.preventDefault() };
 
 	return (
-		<div className='signin-page'>
-			<Container sx={{height: "100%", width: "270px"}}>
-				<div className='signin-form'>
+		<Box height={'100vh'} width={'100vw'} display={'flex'} alignItems={'center'} justifyContent={'center'} bgcolor="background.alternate">
+			<Stack sx={{height: "100%", width: "270px"}} justifyContent={'center'}>
+				<Typography variant="h5" color="text.primary" fontWeight="bold">
+					Sign Up
+				</Typography>
 
-					<FormLabel className='signin-label' color='error'>Sign Up</FormLabel>
+				<TextField 
+					label="Email" 
+					variant="standard"
+					style={{ marginTop: 10 }} 
+					value={email} 
+					onChange={e => setEmail(e.target.value)}/>
+				
+				<TextField 
+					label="Login" 
+					variant="standard" 
+					style={{ marginTop: 20 }}
+					value={login} 
+					onChange={e => setLogin(e.target.value)}/>
 
-					<TextField 
-						id="standard-basic" 
-						label="Email" 
-						variant="standard" 
-						value={email} 
-						onChange={e => setEmail(e.target.value)}/>
+				<TextField 
+					label="Name"
+					variant="standard"
+					style={{ marginTop: 20 }}
+					value={name} 
+					onChange={e => setName(e.target.value)}/>
+
+				<TextField 
+					label="Surname"
+					variant="standard"
+					style={{ marginTop: 20 }} 
+					value={surname} 
+					onChange={e => setSurname(e.target.value)}/>
+
+				<FormControl variant="standard" style={{ marginTop: 20 }}>
+					<InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
 					
-					<TextField 
-						id="standard-basic" 
-						label="Login" 
-						variant="standard" 
-						style={{ marginTop: 20 }}
-						value={login} 
-						onChange={e => setLogin(e.target.value)}/>
+					<Input
+						type={showPassword ? 'text' : 'password'}
+						endAdornment=
+						{
+							<InputAdornment position="end">
+								<IconButton
+									aria-label="toggle password visibility"
+									onClick={handleClickShowPassword}
+									onMouseDown={handleMouseDownPassword}>
+									{
+										showPassword 
+										? <VisibilityOff style={{ fontSize: 18 }}/> 
+										: <Visibility style={{ fontSize: 18 }} />
+									}
+								</IconButton>
+							</InputAdornment>
+						}
+						value={password}
+						onChange={e => setPassword(e.target.value)}/>
+				</FormControl>
 
-					<TextField 
-						id="standard-basic"
-						label="Name"
-						variant="standard"
-						style={{ marginTop: 20 }}
-						value={name} 
-						onChange={e => setName(e.target.value)}/>
-
-					<TextField 
-						id="standard-basic"
-						label="Surname"
-						variant="standard"
-						style={{ marginTop: 20 }} 
-						value={surname} 
-						onChange={e => setSurname(e.target.value)}/>
-
-					<FormControl variant="standard" style={{ marginTop: 20 }}>
-						<InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
-						
-						<Input
-							id="standard-adornment-password"
-							type={showPassword ? 'text' : 'password'}
-							endAdornment=
-							{
-								<InputAdornment position="end">
-									<IconButton
-										aria-label="toggle password visibility"
-										onClick={handleClickShowPassword}
-										onMouseDown={handleMouseDownPassword}>
-										{
-											showPassword 
-											? <VisibilityOff style={{ fontSize: 18 }}/> 
-											: <Visibility style={{ fontSize: 18 }} />
-										}
-									</IconButton>
-								</InputAdornment>
-							}
-							value={password}
-							onChange={e => setPassword(e.target.value)}/>
-					</FormControl>
-
-					<LoadingButton
-						loading={loadingButton}
-						variant="contained" 
-						className="signin-button" 
-						onClick={onSubmitClick}
-						style={{ marginTop: 20 }}>
+				<LoadingButton loading={loadingButton} variant="contained" style={{ marginTop: 20 }} onClick={onSubmitClick}>
 						Next
-					</LoadingButton>
+				</LoadingButton>
 
-					<Link href="/signin" style={{ fontSize: 14, textAlign: 'center', marginTop: 40 }}>
-						Already a user? Sign in
-					</Link>
-				</div>
-			</Container>
-		</div>
+				<Link href="/signin" style={{ fontSize: 14, textAlign: 'center', marginTop: 40 }}>
+					Already a user? Sign in
+				</Link>
+			</Stack>
+		</Box>
 		
 	);
 }
