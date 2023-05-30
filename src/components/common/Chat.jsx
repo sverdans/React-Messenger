@@ -142,7 +142,7 @@ const Chat = (props) =>
 
 	return(
 		
-		<Stack maxHeight={'100vh'}>
+		<Stack height={'100%'} maxHeight={'100vh'}>
 			<Box height={50} display={'flex'} alignItems={'center'}>
 				<FormControl fullWidth m={0} p={0} variant="standard">
 					<Input placeholder='Search' disableUnderline startAdornment={

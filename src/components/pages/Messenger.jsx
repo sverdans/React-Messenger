@@ -5,7 +5,7 @@ import { Grid, Stack, Box } from '@mui/material';
 const Messenger = () => 
 {
 	return (
-		<Stack direction={'row'} spacing={0} m={0} p={0} width={'100%'} maxHeight={'100%'}>
+		<Stack direction={'row'} spacing={0} m={0} p={0} width={'100%'} height={'100%'} maxHeight={'100%'}>
 			<Box m={0} p={0} >
 				<Sidebar />
 			</Box>
