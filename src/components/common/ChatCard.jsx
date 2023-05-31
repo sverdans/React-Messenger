@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from '@mui/material'
+import { Button, Box } from '@mui/material'
 import { UserAvatar } from 'components/common'
 
 const CharCard = ({user}) => 
@@ -10,14 +10,12 @@ const CharCard = ({user}) =>
 	const fullName = user.name + ' ' + user.surname
 
 	return (
-		<Button m={0} p={0} sx={{borderRadius: 0}} className="chat-card" color="info">
-			<div className="chat-card-inner">
-				<UserAvatar user={user} size={50} />
-				<div className="conversation-info">
-					<h1 className="conversation-title">{ fullName }</h1>
-					<p className="conversation-snippet">{ text }</p>
-				</div>
-			</div>
+		<Button sx={{borderRadius: 0, height: 60, margin: 0, padding: 0}}>
+			<UserAvatar user={user} size={50} />
+			<Box display={'flex'} flexDirection={'column'} alignContent={'start'}>
+				<span className="conversation-title">{ fullName }</span>
+				<span className="conversation-snippet">{ text }</span>
+			</Box>
 		</Button>
 	);
 }
