@@ -6,16 +6,14 @@ import GroupIcon from '@mui/icons-material/Group'
 import PersonIcon from '@mui/icons-material/Person'
 import SettingsIcon from '@mui/icons-material/Settings'
 
-import { ContactCard } from 'components/common'
+import { ContactCard, MyModal, MyModalHeader, MyModalFooter } from 'components/common'
 
 import contacts from 'store/Contacts'
 import user from 'store/User'
 
 const Sidebar =  observer(() =>
 {
-	const [open, setOpen] = React.useState(false);
-	const handleOpen = () => setOpen(true);
-	const handleClose = () => setOpen(false);
+	const [isContactModalOpen, setIsContactModalOpen] = React.useState(false)
 
 	const users =  Object.entries(contacts.users).map(user => ({
 		id: user[1].id,
@@ -32,7 +30,7 @@ const Sidebar =  observer(() =>
 				<PersonIcon sx={{color: "text.secondary"}} />
 			</IconButton>
 			
-			<IconButton onClick={handleOpen}>
+			<IconButton onClick={() => {setIsContactModalOpen(true)}}>
 				<GroupIcon sx={{color: "text.secondary"}} />
 			</IconButton>
 			
@@ -40,27 +38,25 @@ const Sidebar =  observer(() =>
 				<SettingsIcon sx={{color: "text.secondary"}} />
 			</IconButton>
 
-			<Modal open={open} onClose={handleClose}>
-				<Box className="modal-wrapper" sx={{bgcolor: 'rgb(23,33,43)', color:'rgb(245,245,245)'}}>
-					<div className='modal'>
-						<div className='modal-header'>
-						</div>
-						
-						<Box>						
-							<Stack m={0} p={0} width={1}>
-							{
-								users.map(contact =>
-									user.user.id !== contact.id &&
-									<ContactCard key={contact.id} user={contact} />)
-							}
-							</Stack>
-						</Box>
+			<MyModal open={isContactModalOpen} setOpen={setIsContactModalOpen}>
 
-						<div className='modal-footer'>
-						</div>
-					</div>
-				</Box>
-			</Modal>
+				<MyModalHeader>
+					
+				</MyModalHeader>
+
+				<Stack m={0} p={0} width={1}>
+				{
+					users.map(contact =>
+						user.user.id !== contact.id &&
+						<ContactCard key={contact.id} user={contact} />)
+				}
+				</Stack>
+
+				<MyModalFooter>
+					
+				</MyModalFooter>
+
+			</MyModal>
 		</Stack>
 	);
 })

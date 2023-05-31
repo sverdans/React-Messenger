@@ -8,3 +8,6 @@ export { default as MessageInput } from "./MessageInput"
 export { default as ChatCard } from "./ChatCard"
 export { default as ContactCard } from "./ContactCard"
 export { default as UserAvatar } from "./UserAvatar"
+
+export * from './MyModal'
+
