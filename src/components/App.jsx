@@ -42,7 +42,6 @@ const App = observer(() =>
 						?
 							<>
 								<Route path="/messenger" element={<Messenger />} />
-								<Route path="/settings" element={<Settings />} />
 								<Route index element={<Navigate to="/messenger" />} />
 
 							</>

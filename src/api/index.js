@@ -1,5 +1,5 @@
 import { io } from 'socket.io-client'
-import contacts from '../store/Contacts'
+import contacts from 'store/Contacts'
 
 const socket = io(process.env.REACT_APP_API_KEY, { autoConnect: true });
 

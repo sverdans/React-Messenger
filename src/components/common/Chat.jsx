@@ -148,12 +148,13 @@ const Chat = (props) =>
 					<Input placeholder='Search' disableUnderline startAdornment={
 						<InputAdornment position="start">
 							<SearchIcon />
-						</InputAdornment>}/>
+						</InputAdornment>}
+					/>
 				</FormControl>
 			
 			</Box>
 		
-			<Box m={0} p={0} maxHeight={'calc(100% - 100px)'} overflow={'auto'}>
+			<Box m={0} p={0} height={'calc(100vh - 100px)'} maxHeight={'calc(100vh - 100px)'} overflow={'auto'}>
 				<List>
 					{renderMessages()}
 				</List>
