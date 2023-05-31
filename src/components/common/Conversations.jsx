@@ -23,10 +23,10 @@ const Conversations =  observer( () =>
 		<Box m={0} p={0} width={300} position={'relative'} height={'100vh'} 
 		bgcolor="background.alternate" sx={{ borderRight: 1, borderColor: 'background.main' }}>
 			<Box height={50} display={'flex'} alignItems={'center'}>
-				<FormControl fullWidth m={0} p={0}>
+				<FormControl fullWidth sx={{bgcolor: 'background.secondary', margin: '0 10px', padding: '0 10px', borderRadius: '5px'}}>
 					<Input placeholder='Search' disableUnderline startAdornment={
 						<InputAdornment position="start">
-							<SearchIcon />
+							<SearchIcon sx={{color: "text.secondary"}} />
 						</InputAdornment>}/>
 				</FormControl>
 			</Box>

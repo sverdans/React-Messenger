@@ -4,11 +4,11 @@ import SearchIcon from '@mui/icons-material/Search'
 
 import { Message, MessageInput } from 'components/common'
 
-import moment from 'moment';
+import moment from 'moment'
 
-const MY_USER_ID = 'apple';
+const MY_USER_ID = 'apple'
 
-const Chat = (props) =>
+const Chat = () =>
 {
 	const [messages, setMessages] = React.useState([])
 
@@ -141,17 +141,15 @@ const Chat = (props) =>
 	}
 
 	return(
-		<Stack height={'100%'} maxHeight={'100vh'}>
-			<Box height={50} display={'flex'} alignItems={'center'} justifyContent={'center'}>
-				
-				<FormControl fullWidth m={0} p={0} variant="standard" backgroundColor={"background.main"}>
+		<Stack sx={{bgcolor: 'background.main', height: '100vh', maxHeight: '100vh'}}>
+			
+			<Box height={50} display={'flex'} alignItems={'center'} sx={{bgcolor: 'background.alternate'}}>
+				<FormControl fullWidth sx={{bgcolor: 'background.secondary', margin: '0 10px', padding: '0 10px', borderRadius: '5px'}}>
 					<Input placeholder='Search' disableUnderline startAdornment={
 						<InputAdornment position="start">
-							<SearchIcon />
-						</InputAdornment>}
-					/>
+							<SearchIcon sx={{color: "text.secondary"}} />
+						</InputAdornment>}/>
 				</FormControl>
-			
 			</Box>
 		
 			<Box m={0} p={0} height={'calc(100vh - 100px)'} maxHeight={'calc(100vh - 100px)'} overflow={'auto'}>

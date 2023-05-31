@@ -5,7 +5,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import { useMediaQuery, Box } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
-import { Messenger, SignIn, SignUp, Settings, Error } from 'components/pages'
+import { Messenger, SignIn, SignUp, Error } from 'components/pages'
 
 import user from 'store/User'
 
@@ -17,7 +17,8 @@ const App = observer(() =>
 			mode: theme,
 			background: {
 				main: '#0e1621',
-				alternate: '#17212b'
+				alternate: '#17212b',
+				secondary: '#242f3d',
 			},
 			text: {
 				primary: '#f5f5f5',

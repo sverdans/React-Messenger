@@ -9,17 +9,18 @@ const MessageInput = () =>
 	const onAttachClick = () => { }
 
 	return (
-		<Box height={50} display={'flex'} justifyContent={'center'} alignItems={'center'} gap={20} bgcolor="background.alternate">
+		<Box sx={{height: '50px', display: 'flex', justifyContent: 'center', alignItems: 'center', 
+			gap: '10px', bgcolor: 'background.alternate', padding: '0 10px'}} >
 			<IconButton>
-				<AttachFileIcon />
+				<AttachFileIcon sx={{color: "text.secondary"}} />
 			</IconButton>
 
 			<FormControl fullWidth m={0} p={0} variant="standard">
-				<Input placeholder='Write a message...' disableUnderline />
+				<Input sx={{verticalAlign: 'middle'}} placeholder='Write a message...' disableUnderline />
 			</FormControl>
 
 			<IconButton>
-				<SendIcon />
+				<SendIcon sx={{color: "text.secondary"}} />
 			</IconButton>
 		</Box>
 	);

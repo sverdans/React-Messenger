@@ -10,7 +10,7 @@ const CharCard = ({user}) =>
 	const fullName = user.name + ' ' + user.surname
 
 	return (
-		<Button sx={{borderRadius: 0, height: 60, margin: 0, padding: 0, justifyContent: 'left'}} >
+		<Button sx={{borderRadius: 0, height: 60, gap:'10px', padding: '0 10px', margin: 0, justifyContent: 'left'}} >
 			<UserAvatar user={user} size={50} />
 			
 			<Box display={'flex'} flexDirection={'column'}>
