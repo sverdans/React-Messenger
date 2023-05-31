@@ -3,7 +3,7 @@ export { default as Conversations } from "./Conversations"
 export { default as Chat } from "./Chat"
 
 export { default as Message } from "./Message"
-export { default as Compose } from "./Compose"
+export { default as MessageInput } from "./MessageInput"
 
 export { default as ChatCard } from "./ChatCard"
 export { default as ContactCard } from "./ContactCard"

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Conversations, Chat, Sidebar } from 'components/common'
-import { Grid, Stack, Box } from '@mui/material';
+import { Stack, Box } from '@mui/material'
 
 const Messenger = () => 
 {

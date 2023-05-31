@@ -2,7 +2,7 @@ import React from 'react'
 import { observer } from 'mobx-react-lite'
 import { Routes, Route, Navigate } from 'react-router-dom'
 
-import { useMediaQuery, Container, Box } from '@mui/material';
+import { useMediaQuery, Box } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 import { Messenger, SignIn, SignUp, Settings, Error } from 'components/pages'
@@ -18,6 +18,10 @@ const App = observer(() =>
 			background: {
 				main: '#0e1621',
 				alternate: '#17212b'
+			},
+			text: {
+				primary: '#f5f5f5',
+				secondary: '#6a7580'
 			}
 		} 
 	});

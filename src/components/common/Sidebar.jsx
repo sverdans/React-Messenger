@@ -29,15 +29,15 @@ const Sidebar =  observer(() =>
 		<Stack m={0} p={0} width={50} height={'100vh'} bgcolor="background.alternate"
 			alignItems="center" justifyContent="center" sx={{ borderRight: 1, borderColor: 'background.main' }}>
 			<IconButton>
-				<PersonIcon />
+				<PersonIcon sx={{color: "text.secondary"}} />
 			</IconButton>
 			
 			<IconButton onClick={handleOpen}>
-				<GroupIcon />
+				<GroupIcon sx={{color: "text.secondary"}} />
 			</IconButton>
 			
 			<IconButton>
-				<SettingsIcon />
+				<SettingsIcon sx={{color: "text.secondary"}} />
 			</IconButton>
 
 			<Modal open={open} onClose={handleClose}>

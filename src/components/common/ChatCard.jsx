@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Box } from '@mui/material'
+import { Button, Box, Typography } from '@mui/material'
 import { UserAvatar } from 'components/common'
 
 const CharCard = ({user}) => 
@@ -10,11 +10,17 @@ const CharCard = ({user}) =>
 	const fullName = user.name + ' ' + user.surname
 
 	return (
-		<Button sx={{borderRadius: 0, height: 60, margin: 0, padding: 0}}>
+		<Button sx={{borderRadius: 0, height: 60, margin: 0, padding: 0, justifyContent: 'left'}} >
 			<UserAvatar user={user} size={50} />
-			<Box display={'flex'} flexDirection={'column'} alignContent={'start'}>
-				<span className="conversation-title">{ fullName }</span>
-				<span className="conversation-snippet">{ text }</span>
+			
+			<Box display={'flex'} flexDirection={'column'}>
+				<Typography color="text.primary" textAlign={'left'} textTransform={'none'} fontWeight={'bold'}>
+					{ fullName }
+				</Typography>
+
+				<Typography color="text.secondary" textAlign={'left'} textTransform={'none'}>
+					{ text }
+				</Typography>
 			</Box>
 		</Button>
 	);

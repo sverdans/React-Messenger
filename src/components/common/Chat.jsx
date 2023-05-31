@@ -2,7 +2,7 @@ import React from 'react'
 import { List, FormControl, Input, InputAdornment, Stack, Box } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 
-import { Compose, Message } from 'components/common'
+import { Message, MessageInput } from 'components/common'
 
 import moment from 'moment';
 
@@ -159,7 +159,7 @@ const Chat = (props) =>
 				</List>
 			</Box>
 
-			<Compose />
+			<MessageInput />
 
 		</Stack>
 	);

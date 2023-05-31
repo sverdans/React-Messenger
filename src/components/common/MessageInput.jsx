@@ -3,7 +3,7 @@ import { FormControl, Input, IconButton, Box } from '@mui/material'
 import SendIcon from '@mui/icons-material/Send'
 import AttachFileIcon from '@mui/icons-material/AttachFile'
 
-const Compose = () =>
+const MessageInput = () =>
 {
 	const onSendClick = () => { }
 	const onAttachClick = () => { }
@@ -25,4 +25,4 @@ const Compose = () =>
 	);
 }
 
-export default Compose
+export default MessageInput

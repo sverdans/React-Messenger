@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from '@mui/material'
+import { Button, Typography } from '@mui/material'
 
 import { UserAvatar } from 'components/common'
 
@@ -8,11 +8,11 @@ const ContactCard = ({user}) =>
 	const fullName = user.name + ' ' + user.surname
 
 	return (
-		<Button m={0} p={0} borderRadius={0} className="contact-card">
-			<div className="contact-card-inner">
-				<UserAvatar user={user} size={50} />
-				<div className="contact-card-info">{ fullName }</div>
-			</div>
+		<Button sx={{borderRadius: 0, height: 60, margin: 0, padding: 0, justifyContent: 'left'}}>
+			<UserAvatar user={user} size={50} />
+			<Typography color="text.primary" textAlign={'left'} textTransform={'none'} fontWeight={'bold'}>
+				{ fullName }
+			</Typography>
 		</Button>
 	);
 }
