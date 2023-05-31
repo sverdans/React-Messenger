@@ -28,9 +28,10 @@ const App = observer(() =>
 	});
 
 	console.log(muiTheme.palette)
+	
 	return (
 		<ThemeProvider theme={muiTheme}>
-			<Box m={0} p={0} width={'100vw'} height={'100vh'} >
+			<Box sx={{margin: 0, padding: 0, width: '100vw', height: '100vh'}}>
 				<Routes>
 
 					<Route path="/error" element={<Error />} />
@@ -49,7 +50,6 @@ const App = observer(() =>
 						:
 							<Route index element={<Navigate to="/signin" />} />
 					}
-
 
 				</Routes>
 			</Box>
