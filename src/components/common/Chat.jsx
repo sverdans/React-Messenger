@@ -11,10 +11,9 @@ const MY_USER_ID = 'apple'
 const renderMessages = (messages) => 
 {
 	let i = 0;
-	let messageCount = messages.length;
 	let tempMessages = [];
 
-	while (i < messageCount)
+	while (i < messages.length)
 	{
 		let previous = messages[i - 1];
 		let current = messages[i];
@@ -82,7 +81,7 @@ const Chat = () =>
 {
 	const [messages, setMessages] = React.useState([])
 
-	React.useEffect(() => { getMessages(); }, [])
+	React.useEffect(() => { getMessages() }, [])
 
 	const getMessages = () => 
 	{
@@ -165,7 +164,7 @@ const Chat = () =>
 		
 			<Box m={0} p={0} height={'calc(100vh - 100px)'} maxHeight={'calc(100vh - 100px)'} overflow={'auto'}>
 				<Stack sx={{margin: 0, padding: '10px 15px'}}>
-					{renderMessages(messages)}
+					{ renderMessages(messages) }
 				</Stack>
 			</Box>
 

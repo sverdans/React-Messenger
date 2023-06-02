@@ -44,7 +44,7 @@ const stringAvatar = (name) =>
 		text = `${name.split(' ')[0][0]}`
 
 	return {
-		sx: { bgcolor: stringToColor(name) },
+		sx: { bgcolor: stringToColor(name), color: 'text.primary', fontWeight: 'bold' },
 		children: text,
 	};
 }
