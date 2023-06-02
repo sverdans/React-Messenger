@@ -1,8 +1,8 @@
 import React from 'react'
 import { observer } from 'mobx-react-lite'
-import { Stack } from '@mui/material'
+import { Button, Stack, Typography } from '@mui/material'
 
-import { ContactCard, MyModal, MyModalHeader, MyModalFooter } from 'components/common'
+import { ContactCard, MyModal, MyModalHeader, MyModalFooter, MyModalBody } from 'components/common'
 
 import contacts from 'store/Contacts'
 import user from 'store/User'
@@ -21,19 +21,23 @@ const ContactsModal = observer(({open, setOpen}) =>
         <MyModal open={open} setOpen={setOpen}>
 
             <MyModalHeader>
-                
+                <Typography color="text.primary" fontWeight="bold" sx={{alignSelf: 'center'}}>
+                    Contacts
+                </Typography> 
             </MyModalHeader>
 
-            <Stack m={0} p={0} width={1}>
-            {
-                users.map(contact =>
-                    user.user.id !== contact.id &&
-                    <ContactCard key={contact.id} user={contact} />)
-            }
-            </Stack>
+            <MyModalBody>
+                <Stack m={0} p={0} width={1}>
+                {
+                    users.map(contact =>
+                        user.user.id !== contact.id &&
+                        <ContactCard key={contact.id} user={contact} />)
+                }
+                </Stack>
+            </MyModalBody>
 
             <MyModalFooter>
-                
+                <Button sx={{ fontWeight: 'bold', marginLeft: 'auto'}} onClick={() => { setOpen(false) }}>Close</Button>
             </MyModalFooter>
 
         </MyModal>
