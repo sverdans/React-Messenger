@@ -7,11 +7,19 @@ const Message = ({data, isMine, isStart, isEnd}) =>
 	const myMessageStyle = 
 	{
 		backgroundColor: 'messageBg.primary',
+		borderTopLeftRadius: '20px',
+		borderBottomLeftRadius: '20px',
+		borderTopRightRadius: isStart ? '20px' : '7px',
+		borderBottomRightRadius: isEnd ? '20px' : '7px',
 	}
 	
 	const otherMessageStyle = 
 	{
 		backgroundColor: 'messageBg.secondary',
+		borderTopLeftRadius: isStart ? '20px' : '7px',
+		borderBottomLeftRadius: isEnd ? '20px' : '7px',
+		borderTopRightRadius: '20px',
+		borderBottomRightRadius: '20px'
 	}
 
 	const myBubbleStyle =
@@ -36,7 +44,6 @@ const Message = ({data, isMine, isStart, isEnd}) =>
 		color: 'text.primary',
 		maxWidth: '75%',
 		padding: '10px 15px',
-		borderRadius: '20px',
 		...(isMine ? myMessageStyle : otherMessageStyle)
 	}
 
