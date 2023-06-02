@@ -1,39 +1,51 @@
-import React from 'react';
-import moment from 'moment';
+import React from 'react'
+import { Box, Typography } from '@mui/material'
 
-const Message = (props) => 
+
+const Message = ({data, isMine, isStart, isEnd}) => 
 {
-	const {
-		data,
-		isMine,
-		startsSequence,
-		endsSequence,
-		showTimestamp
-	} = props;
+	const myMessageStyle = 
+	{
+		backgroundColor: 'messageBg.primary',
+	}
+	
+	const otherMessageStyle = 
+	{
+		backgroundColor: 'messageBg.secondary',
+	}
 
-	const friendlyTimestamp = moment(data.timestamp).format('LLLL');
+	const myBubbleStyle =
+	{
+		justifyContent: 'end',
+	} 
+
+	const otherBubbleStyle = 
+	{
+		justifyContent: 'start',
+	}
+
+	const bubbleStyle = 
+	{
+		marginBottom: (isEnd ? '8px' : '2px'),
+		display: 'flex',
+		...(isMine ? myBubbleStyle : otherBubbleStyle)
+	}
+
+	const messageStyle = {
+		display: 'flex',
+		color: 'text.primary',
+		maxWidth: '75%',
+		padding: '10px 15px',
+		borderRadius: '20px',
+		...(isMine ? myMessageStyle : otherMessageStyle)
+	}
 
 	return (
-		<div className={[
-			'message',
-			`${isMine ? 'mine' : ''}`,
-			`${startsSequence ? 'start' : ''}`,
-			`${endsSequence ? 'end' : ''}`
-		].join(' ')}>
-	
-			{
-			showTimestamp &&
-				<div className="timestamp">
-				{ friendlyTimestamp }
-				</div>
-			}
-
-			<div className="bubble-container">
-				<div className="bubble" title={friendlyTimestamp}>
-					{ data.message }
-				</div>
-			</div>
-		</div>
+		<Box sx={{...bubbleStyle}}>
+			<Box className="bubble" sx={{...messageStyle}}>
+				{ data.message }
+			</Box>
+		</Box>
 	);
 }
 

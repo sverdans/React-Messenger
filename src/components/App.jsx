@@ -23,7 +23,11 @@ const App = observer(() =>
 			text: {
 				primary: '#f5f5f5',
 				secondary: '#6a7580'
-			}
+			},
+			messageBg: {
+				primary: '#2b5378',
+				secondary: '#182533'
+			} 
 		},
 		typography: {
 			fontFamily: [
