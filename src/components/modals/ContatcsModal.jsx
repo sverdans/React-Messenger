@@ -4,8 +4,7 @@ import { Button, Stack, Typography } from '@mui/material'
 
 import { ContactCard, MyModal, MyModalHeader, MyModalFooter, MyModalBody } from 'components/common'
 
-import contacts from 'store/Contacts'
-import user from 'store/User'
+import { user, contacts } from 'store'
 
 const ContactsModal = observer(({open, setOpen}) =>
 {
@@ -27,7 +26,7 @@ const ContactsModal = observer(({open, setOpen}) =>
             </MyModalHeader>
 
             <MyModalBody>
-                <Stack m={0} p={0} width={1}>
+                <Stack m={0} p={0} width={'100%'}>
                 {
                     users.map(contact =>
                         user.user.id !== contact.id &&
@@ -37,7 +36,9 @@ const ContactsModal = observer(({open, setOpen}) =>
             </MyModalBody>
 
             <MyModalFooter>
-                <Button sx={{ fontWeight: 'bold', marginLeft: 'auto'}} onClick={() => { setOpen(false) }}>Close</Button>
+                <Button sx={{ fontWeight: 'bold', marginLeft: 'auto'}} onClick={() => { setOpen(false) }}>
+                    Close
+                </Button>
             </MyModalFooter>
 
         </MyModal>

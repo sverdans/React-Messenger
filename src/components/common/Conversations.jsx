@@ -4,24 +4,27 @@ import { Box, FormControl, Input, InputAdornment, Stack } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 
 import { ChatCard } from 'components/common'
-import user from 'store/User'
-import contacts from 'store/Contacts'
+import { user, chats, contacts } from 'store'
 
-const Conversations =  observer( () => 
+const Conversations = observer(() => 
 {
-	console.log(contacts.users)
+	const currentChat = chats.currentChat;
 
-	const users =  Object.entries(contacts.users).map(user => ({
+	console.log(chats)
+
+	/*
+	const users = Object.entries(contacts.users).map(user => ({
 		id: user[1].id,
 		name: user[1].name,
 		surname: user[1].surname,
 		image: user[1].image,
 		online: user[1].online
 	}))
+	*/
 
 	return (
 		<Box m={0} p={0} width={300} position={'relative'} height={'100vh'} 
-		bgcolor="background.alternate" sx={{ borderRight: 1, borderColor: 'background.main' }}>
+			bgcolor="background.alternate" sx={{ borderRight: 1, borderColor: 'background.main' }}>
 			<Box height={50} display={'flex'} alignItems={'center'}>
 				<FormControl fullWidth sx={{bgcolor: 'background.secondary', margin: '0 10px', padding: '0 10px', borderRadius: '5px'}}>
 					<Input placeholder='Search' disableUnderline startAdornment={
@@ -34,9 +37,9 @@ const Conversations =  observer( () =>
 			<Box m={0} p={0} maxHeight={'calc(100vh - 50px)'} overflow={'auto'}>
 				<Stack m={0} p={0} width={1} className='chat-cards-list'>
 					{
-						users.map(contact =>
-							user.user.id !== contact.id &&
-							<ChatCard key={contact.id} user={contact} />)
+						chats.chats.map(chat =>
+							user.user.id !== chat.user.id &&
+							<ChatCard key={chat.user.id} chat={chat} />)
 					}
 				</Stack>
 			</Box>

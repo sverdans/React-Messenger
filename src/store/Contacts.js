@@ -27,4 +27,5 @@ class Contacts
     }
 }
 
-export default new Contacts()
+const contacts = new Contacts()
+export default contacts;

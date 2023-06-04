@@ -1,10 +1,10 @@
 import React from 'react'
-import { FormControl, Input, InputAdornment, Stack, Box, Button } from '@mui/material'
-import SearchIcon from '@mui/icons-material/Search'
-
-import { Message, MessageInput } from 'components/common'
-
 import moment from 'moment'
+import { observer } from 'mobx-react-lite'
+import { FormControl, Input, InputAdornment, Stack, Box, Button } from '@mui/material'
+
+import { ChatHeader, Message, MessageInput, ChatStub } from 'components/common'
+import { chats } from 'store'
 
 const MY_USER_ID = 'apple'
 
@@ -77,9 +77,11 @@ const renderMessages = (messages) =>
 	return tempMessages;
 }
 
-const Chat = () =>
+const Chat = observer(() =>
 {
 	const [messages, setMessages] = React.useState([])
+
+	const currentChat = chats.currentChat 
 
 	React.useEffect(() => { getMessages() }, [])
 
@@ -151,27 +153,24 @@ const Chat = () =>
 	}
 
 	return(
-		<Stack sx={{bgcolor: 'background.main', height: '100vh', maxHeight: '100vh'}}>
+		chats.current?.id ? 
+			<Stack sx={{bgcolor: 'background.main', height: '100vh', maxHeight: '100vh'}}>
+				
+				<ChatHeader user={currentChat.user}/>
 			
-			<Box height={50} display={'flex'} alignItems={'center'} sx={{bgcolor: 'background.alternate'}}>
-				<FormControl fullWidth sx={{bgcolor: 'background.secondary', margin: '0 10px', padding: '0 10px', borderRadius: '5px'}}>
-					<Input placeholder='Search' disableUnderline startAdornment={
-						<InputAdornment position="start">
-							<SearchIcon sx={{color: "text.secondary"}} />
-						</InputAdornment>}/>
-				</FormControl>
-			</Box>
-		
-			<Box m={0} p={0} height={'calc(100vh - 100px)'} maxHeight={'calc(100vh - 100px)'} overflow={'auto'}>
-				<Stack sx={{margin: 0, padding: '10px 15px'}}>
-					{ renderMessages(messages) }
-				</Stack>
-			</Box>
+				<Box m={0} p={0} height={'calc(100vh - 100px)'} maxHeight={'calc(100vh - 100px)'} overflow={'auto'}>
+					<Stack sx={{margin: 0, padding: '10px 15px'}}>
+						{ renderMessages(messages) }
+					</Stack>
+				</Box>
 
-			<MessageInput />
+				<MessageInput />
 
-		</Stack>
+			</Stack>
+		: 
+			<ChatStub />
+
 	);
-}
+})
 
 export default Chat

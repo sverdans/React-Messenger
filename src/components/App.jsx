@@ -7,7 +7,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 import { Messenger, SignIn, SignUp, Error } from 'components/pages'
 
-import user from 'store/User'
+import { user } from 'store'
 
 const App = observer(() => 
 {
@@ -51,7 +51,6 @@ const App = observer(() =>
 		<ThemeProvider theme={muiTheme}>
 			<Box sx={{margin: 0, padding: 0, width: '100vw', height: '100vh'}}>
 				<Routes>
-
 					<Route path="/error" element={<Error />} />
 					<Route path="/signin" element={<SignIn />} />
 					<Route path="/signup" element={<SignUp />} />
@@ -63,12 +62,10 @@ const App = observer(() =>
 							<>
 								<Route path="/messenger" element={<Messenger />} />
 								<Route index element={<Navigate to="/messenger" />} />
-
 							</>
-						:
+						: 
 							<Route index element={<Navigate to="/signin" />} />
 					}
-
 				</Routes>
 			</Box>
 		</ThemeProvider>
