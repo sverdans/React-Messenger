@@ -11,7 +11,7 @@ class User
     {
         const user = jwt_decode(jwt) 
         this.user = user
-        console.log('[debug]', 'user new state:', user)
+        console.log('[debug]', 'User::auth', user)
     }
 
     check()
@@ -21,7 +21,7 @@ class User
 
     get isAuth()
     {
-        console.log(this.user.name)
+        console.log('[debug]', 'User::isAuth', this.user.name)
         return this.user.name ? true : false
     }
 }

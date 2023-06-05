@@ -3,7 +3,7 @@ import moment from 'moment'
 import { observer } from 'mobx-react-lite'
 import { FormControl, Input, InputAdornment, Stack, Box, Button } from '@mui/material'
 
-import { ChatHeader, Message, MessageInput, ChatStub } from 'components/common'
+import { ChatHeader, Message, MessageInput, ChatStub, ChatTimestamp } from 'components/common'
 import { chats } from 'store'
 
 const MY_USER_ID = 'apple'
@@ -52,20 +52,9 @@ const renderMessages = (messages) =>
 
 		if (showTimestamp)
 		{
-			const friendlyTimestamp = moment(current.timestamp).format('LLLL');
-
-			tempMessages.push(
-				<Box sx={{width: '100%', display: 'flex', justifyContent: 'center', marginBottom: '8px'}}>
-					<Button sx={{backgroundColor: 'background.alternate',
-						borderRadius: '20px',
-						padding: '5px 10px',
-						color: 'text.primary',
-						fontWeight: 'bold',
-						textTransform: 'none'}}>
-						{ friendlyTimestamp }
-					</Button>
-				</Box>
-		)}
+			const timestamp = moment(current.timestamp).format('LLLL');
+			tempMessages.push(<ChatTimestamp>{ timestamp }</ChatTimestamp>)
+		}
 
 		tempMessages.push(
 			<Message key={i} isMine={isMine} isStart={isStart} isEnd={isEnd} data={current}/>
@@ -81,7 +70,7 @@ const Chat = observer(() =>
 {
 	const [messages, setMessages] = React.useState([])
 
-	const currentChat = chats.currentChat 
+	const currentChat = chats.current
 
 	React.useEffect(() => { getMessages() }, [])
 
@@ -153,7 +142,7 @@ const Chat = observer(() =>
 	}
 
 	return(
-		chats.current?.id ? 
+		currentChat?.user ? 
 			<Stack sx={{bgcolor: 'background.main', height: '100vh', maxHeight: '100vh'}}>
 				
 				<ChatHeader user={currentChat.user}/>

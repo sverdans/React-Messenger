@@ -28,4 +28,4 @@ class Contacts
 }
 
 const contacts = new Contacts()
-export default contacts;
+export default contacts

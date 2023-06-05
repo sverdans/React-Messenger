@@ -3,7 +3,7 @@ import { contacts, chats } from 'store'
 
 const socket = io(process.env.REACT_APP_API_KEY, { autoConnect: true });
 
-socket.onAny((event, ...args) => { console.log('[debug]', event, JSON.stringify(args)) })
+socket.onAny((event, ...args) => { console.log('[debug]', 'socket.onAny', 'event:', event, 'args:', args) })
 
 socket.on('message', ({ event, data }) => 
 {

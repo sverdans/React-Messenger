@@ -6,7 +6,7 @@ const CharCard = ({chat}) =>
 {
 	const text = "Hello world!"
 
-	console.log('[debug]', 'ChatCard data:', chat);
+	console.log('[debug]', 'CharCard({chat})', chat);
 	const fullName = chat.user.name + ' ' + chat.user.surname
 
 	return (

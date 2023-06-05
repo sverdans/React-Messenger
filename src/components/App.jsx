@@ -45,7 +45,7 @@ const App = observer(() =>
 		}
 	});
 
-	console.log(muiTheme.palette)
+	console.log('[debug]', 'muiTheme.palette: ', muiTheme.palette)
 	
 	return (
 		<ThemeProvider theme={muiTheme}>

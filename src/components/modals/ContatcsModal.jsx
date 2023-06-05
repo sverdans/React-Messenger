@@ -30,7 +30,7 @@ const ContactsModal = observer(({open, setOpen}) =>
                 {
                     users.map(contact =>
                         user.user.id !== contact.id &&
-                        <ContactCard key={contact.id} user={contact} />)
+                        <ContactCard key={contact.id} user={contact} setModalOpen={setOpen} />)
                 }
                 </Stack>
             </MyModalBody>
