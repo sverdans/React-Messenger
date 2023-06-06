@@ -4,9 +4,8 @@ import { observer } from 'mobx-react-lite'
 import { FormControl, Input, InputAdornment, Stack, Box, Button } from '@mui/material'
 
 import { ChatHeader, Message, MessageInput, ChatStub, ChatTimestamp } from 'components/common'
-import { chats } from 'store'
-
-const MY_USER_ID = 'apple'
+import { chats, user } from 'store'
+import socket from 'api'
 
 const renderMessages = (messages) => 
 {
@@ -15,45 +14,47 @@ const renderMessages = (messages) =>
 
 	while (i < messages.length)
 	{
-		let previous = messages[i - 1];
-		let current = messages[i];
-		let next = messages[i + 1];
-		let isMine = current.author === MY_USER_ID;
-		let currentMoment = moment(current.timestamp);
-		let prevBySameAuthor = false;
-		let nextBySameAuthor = false;
-		let isStart = true;
-		let isEnd = true;
-		let showTimestamp = true;
+		let previous = messages[i - 1]
+		let current = messages[i]
+		let next = messages[i + 1]
+		
+		let isMine = current.authorId === user.user?.id
+		let currentMoment = moment(current.timestamp)
 
-		if (previous) 
+		let prevBySameAuthor = false
+		let nextBySameAuthor = false
+		let isStart = true
+		let isEnd = true
+		let showTimestamp = true
+
+		if (previous)
 		{
-			let previousMoment = moment(previous.timestamp);
-			let previousDuration = moment.duration(currentMoment.diff(previousMoment));
-			prevBySameAuthor = previous.author === current.author;
+			let previousMoment = moment(previous.timestamp)
+			let previousDuration = moment.duration(currentMoment.diff(previousMoment))
+			prevBySameAuthor = previous.authorId === current.authorId
 			
 			if (prevBySameAuthor && previousDuration.as('hours') < 1)
-				isStart = false;
+				isStart = false
 
 			if (previousDuration.as('hours') < 1) 
-				showTimestamp = false;
+				showTimestamp = false
 		}
 
 		if (next) 
 		{
 			let nextMoment = moment(next.timestamp);
-			let nextDuration = moment.duration(nextMoment.diff(currentMoment));
-			nextBySameAuthor = next.author === current.author;
+			let nextDuration = moment.duration(nextMoment.diff(currentMoment))
+			nextBySameAuthor = next.author === current.author
 
 			if (nextBySameAuthor && nextDuration.as('hours') < 1)
-				isEnd = false;
+				isEnd = false
 			
 		}
 
 		if (showTimestamp)
 		{
 			const timestamp = moment(current.timestamp).format('LLLL');
-			tempMessages.push(<ChatTimestamp>{ timestamp }</ChatTimestamp>)
+			tempMessages.push(<ChatTimestamp key={timestamp}>{ timestamp }</ChatTimestamp>)
 		}
 
 		tempMessages.push(
@@ -68,79 +69,22 @@ const renderMessages = (messages) =>
 
 const Chat = observer(() =>
 {
-	const [messages, setMessages] = React.useState([])
-
 	const currentChat = chats.current
+	
+	const [message, setMessage] = React.useState("")
 
-	React.useEffect(() => { getMessages() }, [])
-
-	const getMessages = () => 
+	const onSendClick = (message) =>
 	{
-		var tempMessages = [
-			{
-			id: 1,
-			author: 'apple',
-			message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
-			timestamp: new Date().getTime()
-			},
-			{
-			id: 2,
-			author: 'orange',
-			message: 'It looks like it wraps exactly as it is supposed to. Lets see what a reply looks like!',
-			timestamp: new Date().getTime()
-			},
-			{
-			id: 3,
-			author: 'orange',
-			message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
-			timestamp: new Date().getTime()
-			},
-			{
-			id: 4,
-			author: 'apple',
-			message: 'It looks like it wraps exactly as it is supposed to. Lets see what a reply looks like!',
-			timestamp: new Date().getTime()
-			},
-			{
-			id: 5,
-			author: 'apple',
-			message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
-			timestamp: new Date().getTime()
-			},
-			{
-			id: 6,
-			author: 'apple',
-			message: 'It looks like it wraps exactly as it is supposed to. Lets see what a reply looks like!',
-			timestamp: new Date().getTime()
-			},
-			{
-			id: 7,
-			author: 'orange',
-			message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
-			timestamp: new Date().getTime()
-			},
-			{
-			id: 8,
-			author: 'orange',
-			message: 'It looks like it wraps exactly as it is supposed to. Lets see what a reply looks like!',
-			timestamp: new Date().getTime()
-			},
-			{
-			id: 9,
-			author: 'apple',
-			message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
-			timestamp: new Date().getTime()
-			},
-			{
-			id: 10,
-			author: 'orange',
-			message: 'It looks like it wraps exactly as it is supposed to. Lets see what a reply looks like!',
-			timestamp: new Date().getTime()
-			},
-		]
-		setMessages([...messages, ...tempMessages])
+		console.log('[debug', 'Chat::onSendClick', message)
+		socket.emit("message", { 
+			event: "messageSend",
+			data: { 
+				from: { ...user.user },
+				to: { ...currentChat.user },
+				message: message
+		}})
 	}
-
+	
 	return(
 		currentChat?.user ? 
 			<Stack sx={{bgcolor: 'background.main', height: '100vh', maxHeight: '100vh'}}>
@@ -149,11 +93,13 @@ const Chat = observer(() =>
 			
 				<Box m={0} p={0} height={'calc(100vh - 100px)'} maxHeight={'calc(100vh - 100px)'} overflow={'auto'}>
 					<Stack sx={{margin: 0, padding: '10px 15px'}}>
-						{ renderMessages(messages) }
+						{ renderMessages(currentChat.messages) }
 					</Stack>
 				</Box>
 
-				<MessageInput />
+				<MessageInput message={message} 
+					setMessage={setMessage}
+					onSendClick={ () => {onSendClick(message)} }/>
 
 			</Stack>
 		: 

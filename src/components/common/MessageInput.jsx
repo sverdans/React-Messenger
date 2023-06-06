@@ -3,11 +3,8 @@ import { FormControl, Input, IconButton, Box } from '@mui/material'
 import SendIcon from '@mui/icons-material/Send'
 import AttachFileIcon from '@mui/icons-material/AttachFile'
 
-const MessageInput = () =>
+const MessageInput = ({ message, setMessage, onSendClick}) =>
 {
-	const onSendClick = () => { }
-	const onAttachClick = () => { }
-
 	return (
 		<Box sx={{height: '50px', display: 'flex', justifyContent: 'center', alignItems: 'center', 
 			gap: '10px', bgcolor: 'background.alternate', padding: '0 10px'}} >
@@ -16,10 +13,11 @@ const MessageInput = () =>
 			</IconButton>
 
 			<FormControl fullWidth m={0} p={0} variant="standard">
-				<Input sx={{verticalAlign: 'middle'}} placeholder='Write a message...' disableUnderline />
+				<Input disableUnderline placeholder='Write a message...'
+					value={message} onChange={e => setMessage(e.target.value)}/>
 			</FormControl>
 
-			<IconButton>
+			<IconButton onClick={ onSendClick }>
 				<SendIcon sx={{color: "text.secondary"}} />
 			</IconButton>
 		</Box>

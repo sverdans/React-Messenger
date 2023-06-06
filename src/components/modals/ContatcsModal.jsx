@@ -4,17 +4,29 @@ import { Button, Stack, Typography } from '@mui/material'
 
 import { ContactCard, MyModal, MyModalHeader, MyModalFooter, MyModalBody } from 'components/common'
 
-import { user, contacts } from 'store'
+import { user, contacts, chats } from 'store'
 
 const ContactsModal = observer(({open, setOpen}) =>
 {
-	const users =  Object.entries(contacts.users).map(user => ({
+	const users = Object.entries(contacts.users).map(user => ({
 		id: user[1].id,
 		name: user[1].name,
 		surname: user[1].surname,
 		image: user[1].image,
 		online: user[1].online
 	}))
+
+    const onCardClick = (user) =>
+    {
+		console.log('[debug]', 'ContactCard::onButtonClick', user)
+
+		chats.setCurrent({
+			user: {...user},
+			messages: []
+		})
+
+		setOpen(false)
+    }
 
 	return (
         <MyModal open={open} setOpen={setOpen}>
@@ -30,13 +42,15 @@ const ContactsModal = observer(({open, setOpen}) =>
                 {
                     users.map(contact =>
                         user.user.id !== contact.id &&
-                        <ContactCard key={contact.id} user={contact} setModalOpen={setOpen} />)
+                        <ContactCard key={contact.id} user={contact} 
+                            onClick={ () => {onCardClick(contact)} } />)
                 }
                 </Stack>
             </MyModalBody>
 
             <MyModalFooter>
-                <Button sx={{ fontWeight: 'bold', marginLeft: 'auto'}} onClick={() => { setOpen(false) }}>
+                <Button sx={{ fontWeight: 'bold', marginLeft: 'auto'}} 
+                    onClick={() => { setOpen(false) }}>
                     Close
                 </Button>
             </MyModalFooter>

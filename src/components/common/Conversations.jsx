@@ -8,10 +8,6 @@ import { user, chats, contacts } from 'store'
 
 const Conversations = observer(() => 
 {
-	const currentChat = chats.currentChat;
-
-	console.log(chats)
-
 	/*
 	const users = Object.entries(contacts.users).map(user => ({
 		id: user[1].id,
