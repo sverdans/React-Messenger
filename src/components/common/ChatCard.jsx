@@ -15,7 +15,8 @@ const CharCard = observer(({chat}) =>
 	console.log('[debug]', 'CharCard({chat}) last message:', text)
 
 	const fullName = chat.user.name + ' ' + chat.user.surname
-	const user = contacts.users[chat.user.id];
+	const user = contacts.users[chat.user.id]
+	const isActive = chats.current?.user?.id === chat.user.id 
 
 	const onButtonClick = (user) =>
     {
@@ -24,7 +25,8 @@ const CharCard = observer(({chat}) =>
     }
 
 	return (
-		<Button sx={{borderRadius: 0, height: 60, gap:'10px', padding: '0 10px', margin: 0, justifyContent: 'left'}}
+		<Button variant={isActive ? "contained" : "text"}
+			sx={{borderRadius: 0, height: 60, gap:'10px', padding: '0 10px', margin: 0, justifyContent: 'left'}}
 			onClick={() => { onButtonClick(chat.user) }}>
 			<UserAvatar user={user} size={50} />
 			
