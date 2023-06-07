@@ -19,12 +19,7 @@ const ContactsModal = observer(({open, setOpen}) =>
     const onCardClick = (user) =>
     {
 		console.log('[debug]', 'ContactCard::onButtonClick', user)
-
-		chats.setCurrent({
-			user: {...user},
-			messages: []
-		})
-
+        chats.setCurrent(chats.getChatWithUser(user.id))
 		setOpen(false)
     }
 

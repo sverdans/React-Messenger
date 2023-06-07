@@ -50,7 +50,7 @@ const Message = ({data, isMine, isStart, isEnd}) =>
 	return (
 		<Box sx={{...bubbleStyle}}>
 			<Box sx={{...messageStyle}}>
-				{ data.message }
+				{ data }
 			</Box>
 		</Box>
 	);

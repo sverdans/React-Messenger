@@ -9,6 +9,8 @@ import socket from 'api'
 
 const renderMessages = (messages) => 
 {
+	console.log('[debug]', messages)
+
 	let i = 0;
 	let tempMessages = [];
 
@@ -18,7 +20,7 @@ const renderMessages = (messages) =>
 		let current = messages[i]
 		let next = messages[i + 1]
 		
-		let isMine = current.authorId === user.user?.id
+		let isMine = current.authorId === user.user.id
 		let currentMoment = moment(current.timestamp)
 
 		let prevBySameAuthor = false
@@ -44,7 +46,7 @@ const renderMessages = (messages) =>
 		{
 			let nextMoment = moment(next.timestamp);
 			let nextDuration = moment.duration(nextMoment.diff(currentMoment))
-			nextBySameAuthor = next.author === current.author
+			nextBySameAuthor = next.authorId === current.authorId
 
 			if (nextBySameAuthor && nextDuration.as('hours') < 1)
 				isEnd = false
@@ -58,7 +60,7 @@ const renderMessages = (messages) =>
 		}
 
 		tempMessages.push(
-			<Message key={i} isMine={isMine} isStart={isStart} isEnd={isEnd} data={current}/>
+			<Message key={i} isMine={isMine} isStart={isStart} isEnd={isEnd} data={current.text}/>
 		);
 		
 		i += 1;
@@ -73,6 +75,15 @@ const Chat = observer(() =>
 	
 	const [message, setMessage] = React.useState("")
 
+	const ref = React.useRef();
+
+	React.useEffect( () => { scrollToBottom() }, [chats.messages])
+
+	const scrollToBottom = () => 
+	{
+		ref.current?.scrollIntoView({ behavior: 'smooth' })
+	}
+
 	const onSendClick = (message) =>
 	{
 		console.log('[debug', 'Chat::onSendClick', message)
@@ -83,6 +94,7 @@ const Chat = observer(() =>
 				to: { ...currentChat.user },
 				message: message
 		}})
+		setMessage("")
 	}
 	
 	return(
@@ -93,13 +105,14 @@ const Chat = observer(() =>
 			
 				<Box m={0} p={0} height={'calc(100vh - 100px)'} maxHeight={'calc(100vh - 100px)'} overflow={'auto'}>
 					<Stack sx={{margin: 0, padding: '10px 15px'}}>
-						{ renderMessages(currentChat.messages) }
+						{ renderMessages( chats.messages ) }
+						<div ref={ref} />
 					</Stack>
 				</Box>
 
 				<MessageInput message={message} 
 					setMessage={setMessage}
-					onSendClick={ () => {onSendClick(message)} }/>
+					onSendClick={ () => {onSendClick(message)} } />
 
 			</Stack>
 		: 

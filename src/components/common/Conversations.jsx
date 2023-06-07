@@ -8,19 +8,10 @@ import { user, chats, contacts } from 'store'
 
 const Conversations = observer(() => 
 {
-	/*
-	const users = Object.entries(contacts.users).map(user => ({
-		id: user[1].id,
-		name: user[1].name,
-		surname: user[1].surname,
-		image: user[1].image,
-		online: user[1].online
-	}))
-	*/
-
 	return (
 		<Box m={0} p={0} width={300} position={'relative'} height={'100vh'} 
 			bgcolor="background.alternate" sx={{ borderRight: 1, borderColor: 'background.main' }}>
+			
 			<Box height={50} display={'flex'} alignItems={'center'}>
 				<FormControl fullWidth sx={{bgcolor: 'background.secondary', margin: '0 10px', padding: '0 10px', borderRadius: '5px'}}>
 					<Input placeholder='Search' disableUnderline startAdornment={
@@ -31,7 +22,7 @@ const Conversations = observer(() =>
 			</Box>
 
 			<Box m={0} p={0} maxHeight={'calc(100vh - 50px)'} overflow={'auto'}>
-				<Stack m={0} p={0} width={1} className='chat-cards-list'>
+				<Stack m={0} p={0} width={1}>
 					{
 						chats.chats.map(chat =>
 							user.user.id !== chat.user.id &&
@@ -39,6 +30,7 @@ const Conversations = observer(() =>
 					}
 				</Stack>
 			</Box>
+
 		</Box>
 	);
 })

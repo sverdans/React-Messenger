@@ -6,19 +6,18 @@ import { chats } from 'store'
 
 const CharCard = ({chat}) => 
 {
-	const text = "Hello world!"
+	console.log('[debug]', 'CharCard({chat}) chat:', chat);
 
-	console.log('[debug]', 'CharCard({chat})', chat);
+	const text = chat.Messages[chat.Messages.length - 1].text
+
+	console.log('[debug]', 'CharCard({chat}) last message:', text)
+
 	const fullName = chat.user.name + ' ' + chat.user.surname
 
 	const onButtonClick = (user) =>
     {
 		console.log('[debug]', 'CharCard::onButtonClick', user)
-
-		chats.setCurrent({
-			user: {...user},
-			messages: []
-		})
+		chats.setCurrent(chats.getChatWithUser(chat.user.id))
     }
 
 	return (
@@ -32,7 +31,9 @@ const CharCard = ({chat}) =>
 				</Typography>
 
 				<Typography color="text.secondary" textAlign={'left'} textTransform={'none'}>
-					{ text }
+					{
+						text
+					}
 				</Typography>
 			</Box>
 		</Button>

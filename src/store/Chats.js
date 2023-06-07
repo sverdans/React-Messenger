@@ -1,10 +1,11 @@
-import { makeAutoObservable } from 'mobx'
+import { makeAutoObservable, toJS } from 'mobx'
 import { user } from 'store'
 
 class Chats
 {
     chats = []
     current = {}
+    messages = []
 
     constructor() { makeAutoObservable(this) }
 
@@ -12,6 +13,7 @@ class Chats
     {
         console.log('[debug]', 'Chats::setCurrent', chat)
         this.current = chat
+        this.messages = chat.Messages
     }
 
     // при получение чата ( из списка пользователей НЕ себя ) добавить в chats[n].user собеседника 
@@ -27,6 +29,35 @@ class Chats
             console.log(chat)
         })
         this.chats = chats
+    }
+
+    addMessageToChat(user, message)
+    {
+        console.log('[debug]', 'Chats::addMessageToChat user:', user, 'message:', message)
+
+        for (let i = 0; i < this.chats.length; ++i)
+        {
+            if (this.chats[i].user.id === user.id)
+            {
+                console.log('я нашла')
+                this.chats[i].Messages = [...this.chats[i].Messages, message]
+                this.messages = [...this.chats[i].Messages]
+            }
+        }
+    }
+
+    getChatWithUser(userId)
+    {
+        for (let i = 0; i < this.chats.length; ++i)
+        {
+            if (this.chats[i].user.id === userId)
+            {
+                const result =  toJS(this.chats[i]) 
+                console.log('[debug]', 'Chats::getChatWithUser chat:', result)
+                return result
+            }
+        }
+       
     }
 }
 
