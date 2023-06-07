@@ -77,7 +77,7 @@ const Chat = observer(() =>
 	{
 		console.log('[debug', 'Chat::onSendClick', message)
 		socket.emit("message", { 
-			event: "messageSend",
+			event: "messageFromUser",
 			data: { 
 				from: { ...user.user },
 				to: { ...currentChat.user },
