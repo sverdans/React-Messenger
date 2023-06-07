@@ -25,6 +25,11 @@ class Contacts
         console.log('[debug]', "all users:", users)
         this.users = users
     }
+
+    isUserOnline(userId)
+    {
+        return this.usersp[userId].online
+    }
 }
 
 const contacts = new Contacts()

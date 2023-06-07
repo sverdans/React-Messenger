@@ -49,8 +49,7 @@ const renderMessages = (messages) =>
 			nextBySameAuthor = next.authorId === current.authorId
 
 			if (nextBySameAuthor && nextDuration.as('hours') < 1)
-				isEnd = false
-			
+				isEnd = false	
 		}
 
 		if (showTimestamp)
@@ -73,15 +72,24 @@ const Chat = observer(() =>
 {
 	const currentChat = chats.current
 	
+	const ref = React.useRef();
 	const [message, setMessage] = React.useState("")
 
-	const ref = React.useRef();
 
 	React.useEffect( () => { scrollToBottom() }, [chats.messages])
 
 	const scrollToBottom = () => 
 	{
 		ref.current?.scrollIntoView({ behavior: 'smooth' })
+	}
+
+	const onServerResponse = (res) => 
+	{
+		console.log('[debug]', 'Chat::onServerResponse res:', res)
+		if (res.status === 200)
+		{
+
+		}
 	}
 
 	const onSendClick = (message) =>
@@ -112,7 +120,7 @@ const Chat = observer(() =>
 
 				<MessageInput message={message} 
 					setMessage={setMessage}
-					onSendClick={ () => {onSendClick(message)} } />
+					onSendClick={ () => { onSendClick(message)} } />
 
 			</Stack>
 		: 
