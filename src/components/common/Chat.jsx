@@ -9,8 +9,6 @@ import socket from 'api'
 
 const renderMessages = (messages) => 
 {
-	console.log('[debug]', messages)
-
 	let i = 0;
 	let tempMessages = [];
 
@@ -75,7 +73,6 @@ const Chat = observer(() =>
 	const ref = React.useRef();
 	const [message, setMessage] = React.useState("")
 
-
 	React.useEffect( () => { scrollToBottom() }, [chats.messages])
 
 	const scrollToBottom = () => 
@@ -88,7 +85,7 @@ const Chat = observer(() =>
 		console.log('[debug]', 'Chat::onServerResponse res:', res)
 		if (res.status === 200)
 		{
-
+			chats.addMessageToChat(currentChat?.user, res.data.message)
 		}
 	}
 
@@ -101,7 +98,8 @@ const Chat = observer(() =>
 				from: { ...user.user },
 				to: { ...currentChat.user },
 				message: message
-		}})
+			}}, onServerResponse)
+
 		setMessage("")
 	}
 	
