@@ -55,7 +55,7 @@ const SignUp = () =>
 	{
 		setLoadingButton(true)
 		socket.emit("message", { 
-			event: "signup",
+			event: "SignUp",
 			data: { email, login, name, surname, password }},
 			onServerResponse
 		)

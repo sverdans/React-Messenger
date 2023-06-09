@@ -53,7 +53,7 @@ const SignIn = () =>
 	{
 		setLoadingButton(true)
 		socket.emit("message", { 
-			event: "signin",
+			event: "SignIn",
 			data: { email, password }},
 			onServerResponse
 		)

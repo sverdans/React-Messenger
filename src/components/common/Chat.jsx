@@ -71,7 +71,6 @@ const Chat = observer(() =>
 	const currentChat = chats.current
 	
 	const ref = React.useRef();
-	const [message, setMessage] = React.useState("")
 
 	React.useEffect( () => { scrollToBottom() }, [chats.messages])
 
@@ -85,7 +84,14 @@ const Chat = observer(() =>
 		console.log('[debug]', 'Chat::onServerResponse res:', res)
 		if (res.status === 200)
 		{
-			chats.addMessageToChat(currentChat?.user, res.data.message)
+			if (res.event === 'MessageToUser')
+			{
+				chats.addMessageToChat(currentChat?.user, res.data.message)
+			}
+			else if (res.event === 'NewChat')
+			{
+
+			}
 		}
 	}
 
@@ -93,14 +99,12 @@ const Chat = observer(() =>
 	{
 		console.log('[debug', 'Chat::onSendClick', message)
 		socket.emit("message", { 
-			event: "messageFromUser",
+			event: "MessageFromUser",
 			data: { 
 				from: { ...user.user },
 				to: { ...currentChat.user },
 				message: message
 			}}, onServerResponse)
-
-		setMessage("")
 	}
 	
 	return(
@@ -116,9 +120,7 @@ const Chat = observer(() =>
 					</Stack>
 				</Box>
 
-				<MessageInput message={message} 
-					setMessage={setMessage}
-					onSendClick={ () => { onSendClick(message)} } />
+				<MessageInput onSendClick={onSendClick} />
 
 			</Stack>
 		: 
