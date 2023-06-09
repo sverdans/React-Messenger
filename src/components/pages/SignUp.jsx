@@ -123,7 +123,11 @@ const SignUp = () =>
 						onChange={e => setPassword(e.target.value)}/>
 				</FormControl>
 
-				<LoadingButton loading={loadingButton} variant="contained" style={{ marginTop: 20 }} onClick={onSubmitClick}>
+				<LoadingButton 
+					sx={{marginTop: '20px', textTransform: 'none', fontWeight: 'bold'}}
+					loading={loadingButton} 
+					variant="contained" 
+					onClick={onSubmitClick}>
 						Next
 				</LoadingButton>
 

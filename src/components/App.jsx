@@ -24,6 +24,13 @@ const App = observer(() =>
 				primary: '#f5f5f5',
 				secondary: '#6a7580'
 			},
+		/*	
+			primary: 
+			{
+				dark: '#2f70a5',
+				main: '#3478ab',
+			},
+		*/
 			messageBg: {
 				primary: '#2b5378',
 				secondary: '#182533'

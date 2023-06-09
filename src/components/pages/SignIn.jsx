@@ -66,44 +66,48 @@ const SignIn = () =>
 	return (
 		<Box height={'100vh'} width={'100vw'} display={'flex'} alignItems={'center'} justifyContent={'center'} bgcolor="background.alternate">
 			<Stack sx={{height: "100%", width: "270px"}} justifyContent={'center'}>
-					<Typography variant="h5" color="text.primary" fontWeight="bold">
-						Sign In
-					</Typography>
+				<Typography variant="h5" color="text.primary" fontWeight="bold">
+					Sign In
+				</Typography>
 
-					<TextField label="Email"
-						variant="standard" value={email}
-						style={{ marginTop: 10 }} onChange={e => setEmail(e.target.value)}/>
+				<TextField label="Email"
+					variant="standard" value={email}
+					style={{ marginTop: 10 }} onChange={e => setEmail(e.target.value)}/>
+				
+				<FormControl variant="standard" style={{ marginTop: 20 }}>
+					<InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
 					
-					<FormControl variant="standard" style={{ marginTop: 20 }}>
-						<InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
-						
-						<Input type={showPassword ? 'text' : 'password'}
-							endAdornment=
-							{
-								<InputAdornment position="end">
-									<IconButton
-										aria-label="toggle password visibility"
-										onClick={handleClickShowPassword}
-										onMouseDown={handleMouseDownPassword}>
-										{
-											showPassword 
-											? <VisibilityOff style={{ fontSize: 18 }}/> 
-											: <Visibility style={{ fontSize: 18 }} />
-										}
-									</IconButton>
-								</InputAdornment>
-							}
-							value={password}
-							onChange={e => setPassword(e.target.value)}/>
-					</FormControl>
+					<Input type={showPassword ? 'text' : 'password'}
+						endAdornment=
+						{
+							<InputAdornment position="end">
+								<IconButton
+									aria-label="toggle password visibility"
+									onClick={handleClickShowPassword}
+									onMouseDown={handleMouseDownPassword}>
+									{
+										showPassword 
+										? <VisibilityOff style={{ fontSize: 18 }}/> 
+										: <Visibility style={{ fontSize: 18 }} />
+									}
+								</IconButton>
+							</InputAdornment>
+						}
+						value={password}
+						onChange={e => setPassword(e.target.value)}/>
+				</FormControl>
 
-					<LoadingButton loading={loadingButton} variant="contained" style={{ marginTop: 20 }} onClick={onSubmitClick}>
-						Next
-					</LoadingButton>
+				<LoadingButton 
+					sx={{marginTop: '20px', textTransform: 'none', fontWeight: 'bold'}}
+					loading={loadingButton}
+					variant="contained"
+					onClick={onSubmitClick}>
+					Next
+				</LoadingButton>
 
-					<Link href="/signup" style={{ fontSize: 14, textAlign: 'center', marginTop: 40 }}>
-						Not a user? Sign up
-					</Link>
+				<Link href="/signup" style={{ fontSize: 14, textAlign: 'center', marginTop: 40 }}>
+					Not a user? Sign up
+				</Link>
 			</Stack>
 		</Box>
 	);

@@ -35,7 +35,6 @@ const stringToColor = (string) =>
 const stringAvatar = (name) => 
 {
 	const words = name.split(' ')
-	console.log(words)
 	
 	let text;
 	if (words[1] !== '')

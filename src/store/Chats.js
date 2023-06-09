@@ -16,7 +16,12 @@ class Chats
         this.messages = chat.Messages
     }
 
-    // при получение чата ( из списка пользователей НЕ себя ) добавить в chats[n].user собеседника 
+    addChat(chat)
+    {
+        this.chats = [...this.chats, chat]
+    }
+
+    // chat { Messages: [], user: {} }
     setChats(chats)
     {
         console.log('[debug]', 'Chats::setChats', chats)
@@ -29,6 +34,13 @@ class Chats
             console.log(chat)
         })
         this.chats = chats
+    }
+
+    setCurrentStub(user)
+    {
+        console.log('[debug]', 'Chats::setCurrentStub', chats)
+        this.current = { messages: [], user: user }
+        this.messages = []
     }
 
     addMessageToChat(user, message)

@@ -82,15 +82,19 @@ const Chat = observer(() =>
 	const onServerResponse = (res) => 
 	{
 		console.log('[debug]', 'Chat::onServerResponse res:', res)
+		
 		if (res.status === 200)
 		{
-			if (res.event === 'MessageToUser')
+			switch (res.event)
 			{
-				chats.addMessageToChat(currentChat?.user, res.data.message)
-			}
-			else if (res.event === 'NewChat')
-			{
-
+				case 'MessageToUser': 
+					chats.addMessageToChat(currentChat?.user, res.data.message);
+					break;
+				case 'NewChat':
+					break;
+				default:
+					console.log('unexpected event:', res.event);
+					break;
 			}
 		}
 	}

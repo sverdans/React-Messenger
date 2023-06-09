@@ -10,7 +10,8 @@ const CharCard = observer(({chat}) =>
 {
 	console.log('[debug]', 'CharCard({chat}) chat:', chat);
 
-	const text = chat.Messages[chat.Messages.length - 1].text
+
+	const text = chat.Messages ? chat.Messages[chat.Messages.length - 1].text : ""
 
 	console.log('[debug]', 'CharCard({chat}) last message:', text)
 
