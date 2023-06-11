@@ -50,6 +50,9 @@ const stringAvatar = (name) =>
 
 const UserAvatar = ({ user, size }) => 
 {
+	if (!user)
+		return (<></>)
+		
 	const fullName = user.name + ' ' + user.surname
 
 	return (

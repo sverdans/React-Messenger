@@ -49,7 +49,7 @@ const SignIn = () =>
 		}
 	}
 
-	const onSubmitClick = async () => 
+	const onSubmitClick = () => 
 	{
 		setLoadingButton(true)
 		socket.emit("message", { 

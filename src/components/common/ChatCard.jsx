@@ -8,12 +8,10 @@ import { chats, contacts } from 'store'
 
 const CharCard = observer(({chat}) => 
 {
-	console.log('[debug]', 'CharCard({chat}) chat:', chat);
-
-
 	const text = chat.Messages ? chat.Messages[chat.Messages.length - 1].text : ""
 
-	console.log('[debug]', 'CharCard({chat}) last message:', text)
+	// console.log('[debug]', 'CharCard({chat}) chat:', chat);
+	// console.log('[debug]', 'CharCard({chat}) last message:', text)
 
 	const fullName = chat.user.name + ' ' + chat.user.surname
 	const user = contacts.users[chat.user.id]

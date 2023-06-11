@@ -4,14 +4,15 @@ import { Box, FormControl, Input, InputAdornment, Stack } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 
 import { ChatCard } from 'components/common'
-import { user, chats, contacts } from 'store'
+import { user, chats } from 'store'
 
 const Conversations = observer(() => 
 {
 	return (
-		<Box m={0} p={0} width={300} position={'relative'} height={'100vh'} 
-			bgcolor="background.alternate" sx={{ borderRight: 1, borderColor: 'background.main' }}>
-			
+		<Box bgcolor="background.alternate"
+			sx={{margin: 0, padding: 0, width: '300px', 
+				position: 'relative', height: '100vh',
+				borderRight: 1, borderColor: 'background.main'}} >
 			<Box height={50} display={'flex'} alignItems={'center'}>
 				<FormControl fullWidth sx={{bgcolor: 'background.secondary', margin: '0 10px', padding: '0 10px', borderRadius: '5px'}}>
 					<Input placeholder='Search' disableUnderline startAdornment={

@@ -16,7 +16,7 @@ socket.on('message', ({ event, data }) =>
 
         case 'NewChat':         chats.addChat(data.chat);                        break;
         case 'UserChats':       chats.setChats(data.chats);                      break;
-		case 'MessageToUser':   chats.addMessageToChat(data.user, data.message); break;
+		case 'MessageToUser':   chats.addMessageToChat(data.chat, data.message); break;
 
         default: break;
     }

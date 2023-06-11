@@ -1,7 +1,8 @@
 import React from 'react'
 import moment from 'moment'
+import { toJS } from 'mobx'
 import { observer } from 'mobx-react-lite'
-import { FormControl, Input, InputAdornment, Stack, Box, Button } from '@mui/material'
+import { Stack, Box } from '@mui/material'
 
 import { ChatHeader, Message, MessageInput, ChatStub, ChatTimestamp } from 'components/common'
 import { chats, user } from 'store'
@@ -88,9 +89,11 @@ const Chat = observer(() =>
 			switch (res.event)
 			{
 				case 'MessageToUser': 
-					chats.addMessageToChat(currentChat?.user, res.data.message);
+					chats.addMessageToChat(res.data.chat, res.data.message);
 					break;
 				case 'NewChat':
+					const newChat = chats.addChat(res.data.chat)
+					chats.setCurrent(newChat);
 					break;
 				default:
 					console.log('unexpected event:', res.event);
@@ -99,14 +102,14 @@ const Chat = observer(() =>
 		}
 	}
 
-	const onSendClick = (message) =>
+	const onSendClick = (message, to) =>
 	{
-		console.log('[debug', 'Chat::onSendClick', message)
+		console.log('[debug', 'Chat::onSendClick message:', message, 'to:', toJS(to))
 		socket.emit("message", { 
 			event: "MessageFromUser",
 			data: { 
-				from: { ...user.user },
-				to: { ...currentChat.user },
+				from: user.user,
+				to: to,
 				message: message
 			}}, onServerResponse)
 	}
@@ -124,7 +127,7 @@ const Chat = observer(() =>
 					</Stack>
 				</Box>
 
-				<MessageInput onSendClick={onSendClick} />
+				<MessageInput onSendClick={onSendClick} to={chats.current.user} />
 
 			</Stack>
 		: 

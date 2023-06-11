@@ -9,6 +9,16 @@ class Chats
 
     constructor() { makeAutoObservable(this) }
 
+    // chat must be { Messages: [], user: {} }
+    chatInit(chat)
+    {
+        const companion = chat.Users[0].id === user.user.id ? chat.Users[1] : chat.Users[0]
+        chat.user = companion
+        chat.Messages.sort((a, b) => (a.createdAt > b.createdAt))
+        delete chat.Users;
+        return chat
+    }
+
     setCurrent(chat)
     {
         console.log('[debug]', 'Chats::setCurrent', chat)
@@ -18,46 +28,46 @@ class Chats
 
     addChat(chat)
     {
-        this.chats = [...this.chats, chat]
+        console.log('[debug]', 'Chats::addChat', chat)
+        const newChat = this.chatInit(chat)
+        this.chats = [ ...this.chats, newChat ]
+        return newChat
     }
 
-    // chat { Messages: [], user: {} }
     setChats(chats)
     {
         console.log('[debug]', 'Chats::setChats', chats)
-
-        chats.forEach(chat => {
-            const companion = chat.Users[0].id === user.user.id ? chat.Users[1] : chat.Users[0]
-            console.log(companion)
-            chat.Users = undefined
-            chat.user = companion
-            console.log(chat)
-        })
-        this.chats = chats
+        const newChats = chats.map(chat => ( this.chatInit(chat) ))
+        this.chats = newChats
     }
 
     setCurrentStub(user)
     {
-        console.log('[debug]', 'Chats::setCurrentStub', chats)
+        console.log('[debug]', 'Chats::setCurrentStub user:', toJS(user))
         this.current = { messages: [], user: user }
         this.messages = []
     }
 
-    addMessageToChat(user, message)
+    addMessageToChat(chat, message)
     {
-        console.log('[debug]', 'Chats::addMessageToChat user:', user, 'message:', message)
+        console.log('[debug]', 'Chats::addMessageToChat chat:', chat, 'message:', message)
 
         for (let i = 0; i < this.chats.length; ++i)
         {
-            if (this.chats[i].user.id === user.id)
+            if (this.chats[i].id === chat.id)
             {
                 console.log('я нашла')
                 this.chats[i].Messages = [...this.chats[i].Messages, message]
-                this.messages = [...this.chats[i].Messages]
+                
+                if (this.current.id === chat.id)
+                    this.messages = [...this.chats[i].Messages]
+
+                return
             }
         }
     }
 
+    // user must be !== host
     getChatWithUser(userId)
     {
         for (let i = 0; i < this.chats.length; ++i)

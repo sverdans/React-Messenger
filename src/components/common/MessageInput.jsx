@@ -3,7 +3,7 @@ import { FormControl, Input, IconButton, Box } from '@mui/material'
 import SendIcon from '@mui/icons-material/Send'
 import AttachFileIcon from '@mui/icons-material/AttachFile'
 
-const MessageInput = ({onSendClick}) =>
+const MessageInput = ({onSendClick, to}) =>
 {
 	const [message, setMessage] = React.useState("")
 
@@ -19,7 +19,7 @@ const MessageInput = ({onSendClick}) =>
 					value={message} onChange={e => setMessage(e.target.value)}/>
 			</FormControl>
 
-			<IconButton onClick={ () => { onSendClick(message); setMessage("") } }>
+			<IconButton onClick={ () => { onSendClick(message, to); setMessage("") } }>
 				<SendIcon sx={{color: "text.secondary"}} />
 			</IconButton>
 		</Box>
