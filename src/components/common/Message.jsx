@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Typography } from '@mui/material'
-
+import { getTime } from 'utils'
 
 const Message = ({data, isMine, isStart, isEnd}) => 
 {
@@ -44,13 +44,19 @@ const Message = ({data, isMine, isStart, isEnd}) =>
 		color: 'text.primary',
 		maxWidth: '75%',
 		padding: '10px 15px',
+		gap: '5px',
 		...(isMine ? myMessageStyle : otherMessageStyle)
 	}
 
 	return (
-		<Box sx={{...bubbleStyle}}>
-			<Box sx={{...messageStyle}}>
-				{ data }
+		<Box sx={bubbleStyle}>
+			<Box sx={messageStyle}>
+				{ data.text }
+
+				<Typography color="text.secondary" 
+					sx={{alignSelf: 'end', userSelect: 'none', fontSize: '12px', lineHeight: '1'}}>
+					{ getTime(data.createdAt) }
+				</Typography>
 			</Box>
 		</Box>
 	);

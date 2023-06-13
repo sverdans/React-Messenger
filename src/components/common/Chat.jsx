@@ -58,7 +58,7 @@ const renderMessages = (messages) =>
 		}
 
 		tempMessages.push(
-			<Message key={i} isMine={isMine} isStart={isStart} isEnd={isEnd} data={current.text}/>
+			<Message key={i} isMine={isMine} isStart={isStart} isEnd={isEnd} data={current}/>
 		);
 		
 		i += 1;
@@ -73,7 +73,7 @@ const Chat = observer(() =>
 	
 	const ref = React.useRef();
 
-	React.useEffect( () => { scrollToBottom() }, [chats.messages])
+	React.useEffect( () => { scrollToBottom() }, [ chats.messages ])
 
 	const scrollToBottom = () => 
 	{

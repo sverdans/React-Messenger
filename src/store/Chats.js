@@ -28,9 +28,10 @@ class Chats
 
     addChat(chat)
     {
-        console.log('[debug]', 'Chats::addChat', chat)
+        console.log('[debug]', 'Chats::addChat chat : ', chat)
         const newChat = this.chatInit(chat)
         this.chats = [ ...this.chats, newChat ]
+        console.log('[debug]', 'Chats::addChat chats[] :', toJS(this.chats))
         return newChat
     }
 
@@ -56,12 +57,10 @@ class Chats
         {
             if (this.chats[i].id === chat.id)
             {
-                console.log('я нашла')
                 this.chats[i].Messages = [...this.chats[i].Messages, message]
-                
                 if (this.current.id === chat.id)
                     this.messages = [...this.chats[i].Messages]
-
+                    
                 return
             }
         }
@@ -79,7 +78,6 @@ class Chats
                 return result
             }
         }
-       
     }
 }
 
