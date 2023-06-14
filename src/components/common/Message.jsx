@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Typography } from '@mui/material'
-import { getTime } from 'utils'
+import { getMessageTime } from 'utils'
 
 const Message = ({data, isMine, isStart, isEnd}) => 
 {
@@ -55,7 +55,7 @@ const Message = ({data, isMine, isStart, isEnd}) =>
 
 				<Typography color="text.secondary" 
 					sx={{alignSelf: 'end', userSelect: 'none', fontSize: '12px', lineHeight: '1'}}>
-					{ getTime(data.createdAt) }
+					{ getMessageTime(data.createdAt) }
 				</Typography>
 			</Box>
 		</Box>

@@ -6,6 +6,7 @@ import { Stack, Box } from '@mui/material'
 
 import { ChatHeader, Message, MessageInput, ChatStub, ChatTimestamp } from 'components/common'
 import { chats, user } from 'store'
+import { getChatDate } from 'utils'
 import socket from 'api'
 
 const renderMessages = (messages) => 
@@ -26,7 +27,10 @@ const renderMessages = (messages) =>
 		let nextBySameAuthor = false
 		let isStart = true
 		let isEnd = true
-		let showTimestamp = true
+		let showTimestamp = false
+
+		if (i === 0)
+			showTimestamp = true
 
 		if (previous)
 		{
@@ -37,8 +41,13 @@ const renderMessages = (messages) =>
 			if (prevBySameAuthor && previousDuration.as('hours') < 1)
 				isStart = false
 
-			if (previousDuration.as('hours') < 1) 
-				showTimestamp = false
+			const prevDate = new Date(previous.createdAt)
+			const curDate = new Date(current.createdAt)
+
+			if (prevDate.getFullYear() !== curDate.getFullYear() || 
+				prevDate.getMonth() !== curDate.getMonth() ||
+				prevDate.getDay() !== curDate.getDay())
+				showTimestamp = true	
 		}
 
 		if (next) 
@@ -53,7 +62,7 @@ const renderMessages = (messages) =>
 
 		if (showTimestamp)
 		{
-			const timestamp = moment(current.timestamp).format('LLLL');
+			const timestamp = getChatDate(current.createdAt)
 			tempMessages.push(<ChatTimestamp key={timestamp}>{ timestamp }</ChatTimestamp>)
 		}
 
