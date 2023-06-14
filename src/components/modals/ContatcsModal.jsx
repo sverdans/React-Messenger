@@ -39,7 +39,7 @@ const ContactsModal = observer(({open, setOpen}) =>
             </MyModalHeader>
 
             <MyModalBody>
-                <Stack m={0} p={0} width={'100%'}>
+                <Stack sx={{margin: '0', padding: '0', width: '100%'}}>
                 {
                     users.map(contact =>
                         user.user.id !== contact.id &&
