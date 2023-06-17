@@ -41,7 +41,7 @@ export const MyModalFooter = ({children}) =>
     return (
         <Box height={'55px'}>
             <Divider />
-            <Stack sx={{flexDirection: 'row', height: '35px', padding: '10px 20px', alignItems: 'center'}}>
+            <Stack sx={{flexDirection: 'row', height: '35px', padding: '10px 20px'}}>
                 { children }
             </Stack>
         </Box>
