@@ -129,7 +129,8 @@ const Chat = observer(() =>
 				
 				<ChatHeader user={currentChat.user}/>
 			
-				<Box m={0} p={0} height={'calc(100vh - 100px)'} maxHeight={'calc(100vh - 100px)'} overflow={'auto'}>
+				<Box sx={{margin: 0, padding: 0, overflow: 'auto', 
+					height: 'calc(100vh - 100px)', maxHeight: 'calc(100vh - 100px)'}}>
 					<Stack sx={{margin: 0, padding: '10px 15px'}}>
 						{ renderMessages( chats.messages ) }
 						<div ref={ref} />

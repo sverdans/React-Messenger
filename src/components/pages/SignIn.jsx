@@ -64,7 +64,8 @@ const SignIn = () =>
 	const handleMouseDownPassword = (event) => { event.preventDefault() }
 
 	return (
-		<Box height={'100vh'} width={'100vw'} display={'flex'} alignItems={'center'} justifyContent={'center'} bgcolor="background.alternate">
+		<Box sx={{height: '100vh', width: '100vw', display: 'flex', alignItems: 'center', justifyContent: 'center'}}
+			bgcolor="background.alternate">
 			<Stack sx={{height: "100%", width: "270px"}} justifyContent={'center'}>
 				<Typography variant="h5" color="text.primary" fontWeight="bold">
 					Sign In

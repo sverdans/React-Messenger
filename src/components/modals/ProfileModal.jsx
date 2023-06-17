@@ -5,21 +5,61 @@ import PhotoCameraIcon from '@mui/icons-material/PhotoCamera'
 import { MyModal, MyModalHeader, MyModalFooter, MyModalBody } from 'components/common'
 import { stringAvatar } from 'utils'
 import { user } from 'store'
+import socket from 'api'
 
 const ProfileModal = ({open, setOpen}) =>
 {
     const fullname = user.user.name + ' ' + user.user.surname
 
-    const [profileImage, setProfileImage] = React.useState(user.user?.image)
+    const [file, setFile] = React.useState(null)
 	const [name, setName] = React.useState(user.user?.name)
 	const [surname, setSurname] = React.useState(user.user?.surname)
+    const [profileImage, setProfileImage] = React.useState(user.user?.image)
 
-    const isSaveButtonActive = () => {
+    const isSaveButtonDisable = () => {
         if (name !== user.user.name ||
             surname !== user.user.surname || 
             profileImage !== user.user.image)
-            return true
-        return false
+            return false
+        return true
+    }
+
+    const onServerResponse = (res) => 
+	{
+		console.log('[debug]', 'ProfileModal server response', res)
+				
+		if (res.status === 200)
+		{
+			user.auth(res.data.jwt)
+		}
+		else if (res.status === 400)
+		{
+			alert("В поле " + res.id + " ошибка: " + res.info)
+		}
+		else
+		{
+			alert("server internal error: " + res.info)
+		}
+	}
+
+	const onSaveButtonClick = () => 
+	{
+		socket.emit("upload", file, 
+            { 
+                event: "UpdateProfile",
+                data: { name, surname }
+            },
+			onServerResponse
+		)
+	}
+
+    const onDeleteButtonClick = () => 
+    {
+        socket.emit("message", { 
+			event: "UpdateProfile",
+			data: { name, surname, image: file }},
+			onServerResponse
+		)
     }
 
 	return (
@@ -39,15 +79,15 @@ const ProfileModal = ({open, setOpen}) =>
                             badgeContent=
                             {
                                 <Button component="label" variant="contained"
-                                    sx={{borderRadius: '50%', minWidth: '30px', minHeight: '30px', width: '30px', height: '30px'}}> 
-                                    <input type="file" hidden 
-                                    onChange={(event) => {
-                                        setProfileImage(URL.createObjectURL(event.target.files[0]));
-                                    }} />
+                                    sx={{minWidth: '30px', minHeight: '30px', width: '30px', height: '30px', borderRadius: '50%'}}> 
+                                    <input type="file" hidden onChange={(event) => 
+                                        {
+                                            setProfileImage(URL.createObjectURL(event.target.files[0]))
+                                            setFile(event.target.files[0])
+                                        }} />
                                     <PhotoCameraIcon fontSize='small' />
                                 </Button>
-                            }
-                        >
+                            }>
                             <Avatar src={profileImage} {...stringAvatar(fullname, 100)}/>
                         </Badge>
                     </Box>
@@ -83,20 +123,11 @@ const ProfileModal = ({open, setOpen}) =>
                     Delete account
                 </Button>
 
-                {
-                    isSaveButtonActive() ? 
-                        <Button 
-                            color='success' sx={{ fontWeight: 'bold', marginLeft: 'auto'}}
-                            onClick={() => { setOpen(false) }}>
-                            Save
-                        </Button>
-                    :
-                        <Button disabled
-                            color='success' sx={{ fontWeight: 'bold', marginLeft: 'auto'}}
-                            onClick={() => { setOpen(false) }}>
-                            Save
-                        </Button>
-                }
+                <Button disabled={isSaveButtonDisable()}
+                    color='success' sx={{ fontWeight: 'bold', marginLeft: 'auto'}}
+                    onClick={() => { onSaveButtonClick() }}>
+                    Save
+                </Button>
 
                 <Button sx={{ fontWeight: 'bold', marginLeft: 'auto'}}
                     onClick={() => { setOpen(false) }}>
