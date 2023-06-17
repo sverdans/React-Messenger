@@ -5,16 +5,17 @@ import { Stack, Box } from '@mui/material'
 const Messenger = () => 
 {
 	return (
-		<Stack direction={'row'} spacing={0} m={0} p={0} width={'100%'} height={'100%'} maxHeight={'100%'}>
-			<Box m={0} p={0} >
+		<Stack sx={{flexDirection: 'row', margin: 0, padding: 0, spacing: 0,
+			width: '100%', height: '100%', maxHeight: '100%'}}>
+			<Box m={0} p={0}>
 				<Sidebar />
 			</Box>
 
-			<Box m={0} p={0}>
+			<Box sx={{margin: 0, padding: 0 }}>
 				<Conversations />
 			</Box>
 
-			<Box m={0} p={0} width={'100%'}>
+			<Box sx={{margin: 0, padding: 0, width: '100%'}}>
 				<Chat />
 			</Box>
 		</Stack>

@@ -13,8 +13,10 @@ const Sidebar = () =>
 	const [isProfileModalOpen, setIsProfileModalOpen] = React.useState(false)
 
 	return (
-		<Stack m={0} p={0} width={50} height={'100vh'} bgcolor="background.alternate"
-			alignItems="center" justifyContent="center" sx={{ borderRight: 1, borderColor: 'background.main' }}>
+		<Stack sx={{margin: 0, padding: 0, width: '50px', height: '100vh',
+			backgroundColor: 'background.alternate',
+			alignItems: 'center', justifyContent: 'center',
+			borderRight: 1, borderColor: 'background.main'}}>
 			<IconButton onClick={() => {setIsProfileModalOpen(true)}}>
 				<PersonIcon sx={{color: "text.secondary"}} />
 			</IconButton>

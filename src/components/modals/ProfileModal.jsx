@@ -1,23 +1,10 @@
 import React from 'react'
-import { styled } from '@mui/material/styles'
 import { Button, Stack, Typography, Avatar, Badge, Box, TextField } from '@mui/material'
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera'
 
 import { MyModal, MyModalHeader, MyModalFooter, MyModalBody } from 'components/common'
 import { stringAvatar } from 'utils'
 import { user } from 'store'
-
-const StyledBadge = styled(Badge)(({ theme }) => ({
-    '& .MuiBadge-badge': 
-    {
-        backgroundColor: '#44b700',
-        color: '#44b700',
-        boxShadow: `0 0 0 2px ${theme.palette.background.alternate}`,
-        bottom: 6,
-        right: 6,
-    }
-}))
-
 
 const ProfileModal = ({open, setOpen}) =>
 {
@@ -48,8 +35,7 @@ const ProfileModal = ({open, setOpen}) =>
                 <Stack sx={{margin: '0 auto', padding: '10px 0',  width: "310px", gap: '5px', justifyContent: 'center'}}>
 
                     <Box sx={{margin: '20px 0 0 0', padding: '0', width: '100%', display: 'flex', justifyContent: 'center'}}>
-                        <Badge anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-                            overlap="circular" sx={{boxShadow: '0 0 0 2px background.alternate'}}
+                        <Badge anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} overlap="circular"
                             badgeContent=
                             {
                                 <Button component="label" variant="contained"
