@@ -4,7 +4,7 @@ import SearchIcon from '@mui/icons-material/Search'
 
 const ChatHeader = ({user}) => 
 {
-	const fullName = user.name + ' ' + user.surname
+	const fullName = user ? user.name + ' ' + user.surname : 'DELETED'
 
 	return (
         <Stack sx={{height: 50, padding: '0px 10px', bgcolor: 'background.alternate', flexDirection: 'row', alignItems: 'center'}} >

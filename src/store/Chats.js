@@ -95,6 +95,19 @@ class Chats
         }
     }
 
+    getChatById(chatId)
+    {
+        for (let i = 0; i < this.chats.length; ++i)
+        {
+            if (this.chats[i].id === chatId)
+            {
+                const result =  toJS(this.chats[i]) 
+                console.log('[debug]', 'Chats::getChatWithUser chat:', result)
+                return result
+            }
+        }   
+    }
+
     Clear()
     {
         this.chats = []

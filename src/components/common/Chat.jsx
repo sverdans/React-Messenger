@@ -79,7 +79,8 @@ const renderMessages = (messages) =>
 const Chat = observer(() =>
 {
 	const currentChat = chats.current
-	
+	const companion = currentChat?.user
+
 	const ref = React.useRef();
 
 	React.useEffect( () => { scrollToBottom() }, [ chats.current ])
@@ -127,7 +128,7 @@ const Chat = observer(() =>
 		currentChat.id ? 
 			<Stack sx={{bgcolor: 'background.main', height: '100vh', maxHeight: '100vh'}}>
 				
-				<ChatHeader user={currentChat.user}/>
+				<ChatHeader user={companion}/>
 			
 				<Box sx={{margin: 0, padding: 0, overflow: 'auto', 
 					height: 'calc(100vh - 100px)', maxHeight: 'calc(100vh - 100px)'}}>
@@ -137,8 +138,11 @@ const Chat = observer(() =>
 					</Stack>
 				</Box>
 
-				<MessageInput onSendClick={onSendClick} to={chats.current.user} />
-
+				{
+					(companion !== undefined) &&
+					<MessageInput onSendClick={onSendClick} to={companion} />
+				}
+				
 			</Stack>
 		: 
 			<ChatStub />

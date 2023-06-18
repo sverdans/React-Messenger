@@ -17,7 +17,7 @@ const CharCard = observer(({chat}) =>
 	const onButtonClick = (user) =>
     {
 		console.log('[debug]', 'CharCard::onButtonClick', user)
-		chats.setCurrent(chats.getChatWithUser(chat.user.id))
+		chats.setCurrent(chats.getChatById(chat.id))
     }
 
 	return (
@@ -40,14 +40,12 @@ const CharCard = observer(({chat}) =>
 
 				<Box sx={{display: 'flex', flexDirection: 'row', gap: '5px'}}>
 					{
-						lastMessage && (
-							lastMessage.authorId === user.user.id 
-							? <Typography textTransform={'none'}>You:</Typography>
-							: <></>
-						)
+						lastMessage.authorId === user.user.id 
+						? <Typography textTransform={'none'}>You:</Typography>
+						: <></>
 					}
 					<Typography color="text.secondary" textAlign={'left'} textTransform={'none'}>
-						{ lastMessage?.text }
+						{ lastMessage.text }
 					</Typography>
 				</Box>
 			</Box>
