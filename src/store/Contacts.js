@@ -13,6 +13,13 @@ class Contacts
         this.users[user.id] = user
     }
 
+    updateContact(user)
+    {
+        console.log('[debug]', "contacts update:", user)
+        user.online = true;
+        this.users[user.id] = user
+    }
+
     disconnected(user)
     {
         console.log('[debug]', "contacts online:", user)

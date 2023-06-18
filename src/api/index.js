@@ -10,9 +10,10 @@ socket.on('message', ({ event, data }) =>
     console.log('[debug]', event, data)
     switch (event)
     {
-        case 'AllUsers':        contacts.init(data.users);                       break;
-        case 'SomebodyOnline':  contacts.connected(data.user);                   break;
-        case 'SomebodyOffline': contacts.disconnected(data.user);                break;
+        case 'AllUsers':              contacts.init(data.users);                 break;
+        case 'SomebodyOnline':        contacts.connected(data.user);             break;
+        case 'SomebodyOffline':       contacts.disconnected(data.user);          break;
+        case 'SomebodyUpdateProfile': contacts.updateContact(data.user);         break; // not host
 
         case 'NewChat':         chats.addChat(data.chat);                        break;
         case 'UserChats':       chats.setChats(data.chats);                      break;

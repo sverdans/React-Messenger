@@ -12,9 +12,9 @@ class Chats
     SortChats()
     {
         this.chats.sort((a, b) => {
-            const aTime = a.Messages[a.Messages.length - 1].createdAt 
-            const bTime = b.Messages[b.Messages.length - 1].createdAt 
-            return (aTime < bTime)
+            const aLastUpdate = a.Messages[a.Messages.length - 1].createdAt 
+            const bLastUpdate = b.Messages[b.Messages.length - 1].createdAt 
+            return (aLastUpdate < bLastUpdate)
         })
     }
 

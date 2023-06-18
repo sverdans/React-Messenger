@@ -31,17 +31,16 @@ const SignIn = () =>
 	const onServerResponse = (res) => 
 	{
 		console.log('[debug]', 'server response', res)
-				
+		setLoadingButton(false)
+
 		if (res.status === 200)
 		{
 			user.auth(res.data.jwt)
-			setLoadingButton(false)
 			navigate("/messenger")
 		}
 		else if (res.status === 400)
 		{
 			alert("В поле " + res.id + " ошибка: " + res.info)
-			setLoadingButton(false)
 		}
 		else
 		{

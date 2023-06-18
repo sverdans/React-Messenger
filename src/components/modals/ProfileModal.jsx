@@ -1,5 +1,7 @@
 import React from 'react'
+import { observer } from 'mobx-react-lite'
 import { Button, Stack, Typography, Avatar, Badge, Box, TextField } from '@mui/material'
+import { LoadingButton } from '@mui/lab'
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera'
 
 import { MyModal, MyModalHeader, MyModalFooter, MyModalBody } from 'components/common'
@@ -7,19 +9,31 @@ import { stringAvatar } from 'utils'
 import { user } from 'store'
 import socket from 'api'
 
-const ProfileModal = ({open, setOpen}) =>
+const ProfileModal = observer(({open, setOpen}) =>
 {
-    const fullname = user.user.name + ' ' + user.user.surname
+    const profile = user.user
+    const fullname = profile.name + ' ' + profile.surname
 
     const [file, setFile] = React.useState(null)
-	const [name, setName] = React.useState(user.user?.name)
-	const [surname, setSurname] = React.useState(user.user?.surname)
-    const [profileImage, setProfileImage] = React.useState(user.user?.image)
+
+	const [name, setName] = React.useState(profile.name)
+	const [surname, setSurname] = React.useState(profile.surname)
+    const [profileImage, setProfileImage] = React.useState(profile.image)
+
+    React.useEffect( () => { 
+        console.log('ProfileModal::useEffect')
+        setName(profile.name)
+        setSurname(profile.surname)
+        setProfileImage(profile.image)
+     }, [ profile ])
+
+
+	const [loadingButton, setLoadingButton] = React.useState(false) // for save
 
     const isSaveButtonDisable = () => {
-        if (name !== user.user.name ||
-            surname !== user.user.surname || 
-            profileImage !== user.user.image)
+        if (name !== profile.name ||
+            surname !== profile.surname || 
+            profileImage !== profile.image)
             return false
         return true
     }
@@ -27,7 +41,8 @@ const ProfileModal = ({open, setOpen}) =>
     const onServerResponse = (res) => 
 	{
 		console.log('[debug]', 'ProfileModal server response', res)
-				
+		setLoadingButton(false)
+		
 		if (res.status === 200)
 		{
 			user.auth(res.data.jwt)
@@ -44,10 +59,11 @@ const ProfileModal = ({open, setOpen}) =>
 
 	const onSaveButtonClick = () => 
 	{
+		setLoadingButton(true)
 		socket.emit('upload', file, 
             { 
                 event: 'UpdateProfile',
-                data: { name, surname, user: user.user }
+                data: { name, surname, user: profile }
             },
 			onServerResponse
 		)
@@ -58,7 +74,7 @@ const ProfileModal = ({open, setOpen}) =>
         socket.emit('message', 
             { 
                 event: 'UpdateProfile',
-                data: { user: user.user }
+                data: { user: profile }
             },
 			onServerResponse
 		)
@@ -125,11 +141,12 @@ const ProfileModal = ({open, setOpen}) =>
                     Delete account
                 </Button>
 
-                <Button disabled={isSaveButtonDisable()}
+                <LoadingButton disabled={isSaveButtonDisable()}
+                    loading={loadingButton}
                     color='success' sx={{ fontWeight: 'bold', marginLeft: 'auto'}}
                     onClick={() => { onSaveButtonClick() }}>
                     Save
-                </Button>
+                </LoadingButton>
 
                 <Button sx={{ fontWeight: 'bold', marginLeft: 'auto'}}
                     onClick={() => { setOpen(false) }}>
@@ -139,6 +156,6 @@ const ProfileModal = ({open, setOpen}) =>
 
         </MyModal>
 	);
-}
+})
 
 export default ProfileModal
