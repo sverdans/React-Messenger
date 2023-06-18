@@ -24,6 +24,11 @@ class User
         console.log('[debug]', 'User::isAuth', this.user.name)
         return this.user.name ? true : false
     }
+
+    Clear()
+    {
+        this.user = {}  
+    }
 }
 
 const user = new User()

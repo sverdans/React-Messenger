@@ -1,6 +1,7 @@
 import React from 'react'
 import { Avatar, Badge } from '@mui/material'
 import { styled } from '@mui/material/styles'
+import NoAccountsIcon from '@mui/icons-material/NoAccounts';
 
 import { stringAvatar } from 'utils'
 
@@ -18,7 +19,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 const UserAvatar = ({ user, size }) => 
 {
 	if (!user)
-		return (<></>)
+		return (<NoAccountsIcon fontSize='large' />)
 		
 	const fullName = user.name + ' ' + user.surname
 

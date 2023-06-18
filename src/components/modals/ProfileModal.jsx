@@ -1,12 +1,13 @@
 import React from 'react'
 import { observer } from 'mobx-react-lite'
+import { useHistory } from 'react-router-dom'
 import { Button, Stack, Typography, Avatar, Badge, Box, TextField } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera'
 
 import { MyModal, MyModalHeader, MyModalFooter, MyModalBody } from 'components/common'
 import { stringAvatar } from 'utils'
-import { user } from 'store'
+import { user, contacts, chats } from 'store'
 import socket from 'api'
 
 const ProfileModal = observer(({open, setOpen}) =>
@@ -25,10 +26,10 @@ const ProfileModal = observer(({open, setOpen}) =>
         setName(profile.name)
         setSurname(profile.surname)
         setProfileImage(profile.image)
-     }, [ profile ])
+    }, [ profile ])
 
-
-	const [loadingButton, setLoadingButton] = React.useState(false) // for save
+    const [loadingSaveButton, setLoadingSaveButton] = React.useState(false)
+    const [loadingDeleteButton, setLoadingDeleteButton] = React.useState(false)
 
     const isSaveButtonDisable = () => {
         if (name !== profile.name ||
@@ -38,10 +39,10 @@ const ProfileModal = observer(({open, setOpen}) =>
         return true
     }
 
-    const onServerResponse = (res) => 
-	{
-		console.log('[debug]', 'ProfileModal server response', res)
-		setLoadingButton(false)
+    const onSaveServerResponse = (res) => 
+    {
+        console.log('[debug]', 'ProfileModal::onSaveServerResponse', res)
+		setLoadingSaveButton(false)
 		
 		if (res.status === 200)
 		{
@@ -50,37 +51,55 @@ const ProfileModal = observer(({open, setOpen}) =>
 		else if (res.status === 400)
 		{
 			alert("В поле " + res.id + " ошибка: " + res.info)
-		}
-		else
-		{
-			alert("server internal error: " + res.info)
-		}
-	}
+        }
+        else
+        {
+            alert("server internal error: " + res.info)
+        }
+    }
 
-	const onSaveButtonClick = () => 
-	{
-		setLoadingButton(true)
-		socket.emit('upload', file, 
+    const onSaveButtonClick = () => 
+    {
+        setLoadingSaveButton(true)
+        socket.emit('upload', file, 
             { 
                 event: 'UpdateProfile',
                 data: { name, surname, user: profile }
             },
-			onServerResponse
-		)
-	}
+            onSaveServerResponse
+        )
+    }
+
+    const onDeleteServerResponse = (res) =>
+    {
+        console.log('[debug]', 'ProfileModal::onSaveServerResponse', res)
+        setLoadingDeleteButton(false)
+        
+        if (res.status === 200)
+        {
+            user.Clear()
+            chats.Clear()
+            contacts.Clear()
+        }
+        else
+        {
+            alert("server internal error: " + res.info)
+        }
+    }
 
     const onDeleteButtonClick = () => 
     {
+        setLoadingDeleteButton(true)
         socket.emit('message', 
             { 
-                event: 'UpdateProfile',
+                event: 'DeleteProfile',
                 data: { user: profile }
             },
-			onServerResponse
-		)
+            onDeleteServerResponse
+        )
     }
 
-	return (
+    return (
         <MyModal open={open} setOpen={setOpen}>
 
             <MyModalHeader>
@@ -136,13 +155,14 @@ const ProfileModal = observer(({open, setOpen}) =>
             </MyModalBody>
 
             <MyModalFooter>
-                <Button color='error' sx={{ fontWeight: 'bold'}}
-                    onClick={() => { setOpen(false) }}>
+                <LoadingButton loading={loadingDeleteButton}
+                    color='error' sx={{ fontWeight: 'bold'}}
+                    onClick={() => { onDeleteButtonClick() }}>
                     Delete account
-                </Button>
+                </LoadingButton>
 
-                <LoadingButton disabled={isSaveButtonDisable()}
-                    loading={loadingButton}
+                <LoadingButton loading={loadingSaveButton} 
+                    disabled={isSaveButtonDisable()}
                     color='success' sx={{ fontWeight: 'bold', marginLeft: 'auto'}}
                     onClick={() => { onSaveButtonClick() }}>
                     Save

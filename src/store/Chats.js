@@ -58,7 +58,7 @@ class Chats
     setCurrentStub(user)
     {
         console.log('[debug]', 'Chats::setCurrentStub user:', toJS(user))
-        this.current = { messages: [], user: user }
+        this.current = { messages: [], user: user, id: -1 }
         this.messages = []
     }
 
@@ -93,6 +93,13 @@ class Chats
                 return result
             }
         }
+    }
+
+    Clear()
+    {
+        this.chats = []
+        this.current = {}
+        this.messages = []
     }
 }
 

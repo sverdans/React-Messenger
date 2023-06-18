@@ -15,9 +15,9 @@ socket.on('message', ({ event, data }) =>
         case 'SomebodyOffline':       contacts.disconnected(data.user);          break;
         case 'SomebodyUpdateProfile': contacts.updateContact(data.user);         break; // not host
 
-        case 'NewChat':         chats.addChat(data.chat);                        break;
-        case 'UserChats':       chats.setChats(data.chats);                      break;
-		case 'MessageToUser':   chats.addMessageToChat(data.chat, data.message); break;
+        case 'NewChat':       chats.addChat(data.chat);                          break;
+        case 'UserChats':     chats.setChats(data.chats);                        break;
+        case 'MessageToUser': chats.addMessageToChat(data.chat, data.message);   break;
 
         default: break;
     }

@@ -82,7 +82,7 @@ const Chat = observer(() =>
 	
 	const ref = React.useRef();
 
-	React.useEffect( () => { scrollToBottom() }, [ chats.messages ])
+	React.useEffect( () => { scrollToBottom() }, [ chats.current ])
 
 	const scrollToBottom = () => 
 	{
@@ -124,7 +124,7 @@ const Chat = observer(() =>
 	}
 	
 	return(
-		currentChat?.user ? 
+		currentChat.id ? 
 			<Stack sx={{bgcolor: 'background.main', height: '100vh', maxHeight: '100vh'}}>
 				
 				<ChatHeader user={currentChat.user}/>

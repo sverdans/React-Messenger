@@ -10,12 +10,9 @@ const CharCard = observer(({chat}) =>
 {
 	const lastMessage = chat.Messages ? chat.Messages[chat.Messages.length - 1] : undefined
 
-	// console.log('[debug]', 'CharCard({chat}) chat:', chat);
-	// console.log('[debug]', 'CharCard({chat}) last message:', text)
-
-	const fullName = chat.user.name + ' ' + chat.user.surname
-	const author = contacts.users[chat.user.id]
-	const isActive = chats.current?.user?.id === chat.user.id 
+	const fullName = chat.user ? chat.user.name + ' ' + chat.user.surname : 'DELETED'
+	const author =  chat.user ? contacts.users[chat.user.id] : undefined
+	const isActive = chats.current.id === chat.id 
 
 	const onButtonClick = (user) =>
     {
@@ -27,6 +24,7 @@ const CharCard = observer(({chat}) =>
 		<Button variant={isActive ? "contained" : "text"}
 			sx={{borderRadius: 0, height: 60, gap:'10px', padding: '0 10px', margin: 0, justifyContent: 'left'}}
 			onClick={() => { onButtonClick(chat.user) }}>
+			
 			<UserAvatar user={author} size={50} />
 			
 			<Box sx={{display: 'flex', flexDirection: 'column', width: '100%'}}>
@@ -36,15 +34,17 @@ const CharCard = observer(({chat}) =>
 					</Typography>
 					
 					<Typography color="text.secondary" textAlign={'left'} textTransform={'none'}>
-						{ getDate(lastMessage?.createdAt) }
+						{ lastMessage ? getDate(lastMessage.createdAt) : '' }
 					</Typography>
 				</Box>
 
 				<Box sx={{display: 'flex', flexDirection: 'row', gap: '5px'}}>
 					{
-						lastMessage.authorId === user.user.id 
-						? <Typography textTransform={'none'}>You:</Typography>
-						: <></>
+						lastMessage && (
+							lastMessage.authorId === user.user.id 
+							? <Typography textTransform={'none'}>You:</Typography>
+							: <></>
+						)
 					}
 					<Typography color="text.secondary" textAlign={'left'} textTransform={'none'}>
 						{ lastMessage?.text }

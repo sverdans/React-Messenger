@@ -25,9 +25,7 @@ const Conversations = observer(() =>
 			<Box m={0} p={0} maxHeight={'calc(100vh - 50px)'} overflow={'auto'}>
 				<Stack m={0} p={0} width={1}>
 					{
-						chats.chats.map(chat =>
-							user.user.id !== chat.user.id &&
-							<ChatCard key={chat.user.id} chat={chat} />)
+						chats.chats.map(chat => <ChatCard key={chat.id} chat={chat} />)
 					}
 				</Stack>
 			</Box>

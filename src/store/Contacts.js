@@ -37,6 +37,11 @@ class Contacts
     {
         return this.usersp[userId].online
     }
+
+    Clear()
+    {
+        this.users = {}  
+    }
 }
 
 const contacts = new Contacts()
