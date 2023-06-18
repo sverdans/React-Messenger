@@ -44,10 +44,10 @@ const ProfileModal = ({open, setOpen}) =>
 
 	const onSaveButtonClick = () => 
 	{
-		socket.emit("upload", file, 
+		socket.emit('upload', file, 
             { 
-                event: "UpdateProfile",
-                data: { name, surname }
+                event: 'UpdateProfile',
+                data: { name, surname, user: user.user }
             },
 			onServerResponse
 		)
@@ -55,9 +55,11 @@ const ProfileModal = ({open, setOpen}) =>
 
     const onDeleteButtonClick = () => 
     {
-        socket.emit("message", { 
-			event: "UpdateProfile",
-			data: { name, surname, image: file }},
+        socket.emit('message', 
+            { 
+                event: 'UpdateProfile',
+                data: { user: user.user }
+            },
 			onServerResponse
 		)
     }

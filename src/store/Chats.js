@@ -9,6 +9,15 @@ class Chats
 
     constructor() { makeAutoObservable(this) }
 
+    SortChats()
+    {
+        this.chats.sort((a, b) => {
+            const aTime = a.Messages[a.Messages.length - 1].createdAt 
+            const bTime = b.Messages[b.Messages.length - 1].createdAt 
+            return (aTime < bTime)
+        })
+    }
+
     // chat must be { Messages: [], user: {} }
     chatInit(chat)
     {
@@ -32,6 +41,8 @@ class Chats
         const newChat = this.chatInit(chat)
         this.chats = [ ...this.chats, newChat ]
         console.log('[debug]', 'Chats::addChat chats[] :', toJS(this.chats))
+        
+        this.SortChats()
         return newChat
     }
 
@@ -40,6 +51,8 @@ class Chats
         console.log('[debug]', 'Chats::setChats', chats)
         const newChats = chats.map(chat => ( this.chatInit(chat) ))
         this.chats = newChats
+
+        this.SortChats()
     }
 
     setCurrentStub(user)
@@ -58,6 +71,8 @@ class Chats
             if (this.chats[i].id === chat.id)
             {
                 this.chats[i].Messages = [...this.chats[i].Messages, message]
+                this.SortChats()
+
                 if (this.current.id === chat.id)
                     this.messages = [...this.chats[i].Messages]
                     
