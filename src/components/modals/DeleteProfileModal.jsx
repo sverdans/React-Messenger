@@ -1,16 +1,16 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Button, Typography } from '@mui/material'
+import { Button, Typography, Box } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
 
-import { MyModal, MyModalHeader, MyModalBody } from 'components/common'
+import { MyModal, MyModalFooter } from 'components/common'
 
 import { user, contacts, chats } from 'store'
 import socket from 'api'
 
 const DeleteProfileModal = ({ open, setOpen, profile }) =>
 {
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
     const [loadingDeleteButton, setLoadingDeleteButton] = React.useState(false)
 
@@ -45,23 +45,25 @@ const DeleteProfileModal = ({ open, setOpen, profile }) =>
     }
 
 	return (
-        <MyModal open={open} setOpen={setOpen}>
-            <MyModalBody>
+        <MyModal open={open} setOpen={setOpen} width={'300px'}>
+            <Box sx={{margin: '35px 15px 0px 15px', padding: 0, overflow: 'auto'}}>
                 <Typography color="text.primary" sx={{ alignSelf: 'start' }}>
                     Are you sure you want to delete profile?
-                </Typography> 
+                </Typography>
+            </Box>
 
+            <MyModalFooter divider={false}>
                 <Button sx={{ fontWeight: 'bold', marginLeft: 'auto' }} 
                     onClick={() => { setOpen(false) }}>
                     Cancel
                 </Button>
 
                 <LoadingButton loading={loadingDeleteButton}
-                    color='error' sx={{ fontWeight: 'bold'}}
+                    color='error' sx={{ fontWeight: 'bold' }}
                     onClick={() => { onDeleteButtonClick() }}>
-                    Delete account
+                    Delete
                 </LoadingButton>
-            </MyModalBody>
+            </MyModalFooter>
         </MyModal>
 	);
 }

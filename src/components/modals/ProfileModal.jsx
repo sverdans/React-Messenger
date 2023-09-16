@@ -1,13 +1,12 @@
 import React from 'react'
 import { observer } from 'mobx-react-lite'
-import { useHistory } from 'react-router-dom'
 import { Button, Stack, Typography, Avatar, Badge, Box, TextField } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera'
 
 import { MyModal, MyModalHeader, MyModalFooter, MyModalBody } from 'components/common'
 import { DeleteProfileModal } from 'components/modals'
-import { user, contacts, chats } from 'store'
+import { user } from 'store'
 import { stringAvatar } from 'utils'
 import socket from 'api'
 
@@ -21,8 +20,8 @@ const ProfileModal = observer(({open, setOpen}) =>
 	const [name, setName] = React.useState(profile.name)
 	const [surname, setSurname] = React.useState(profile.surname)
     const [profileImage, setProfileImage] = React.useState(profile.image)
-	const [isDeleteProfileModalOpen, setIsDeleteProfileModalOpen] = React.useState(false)
     const [loadingSaveButton, setLoadingSaveButton] = React.useState(false)
+	const [isDeleteProfileModalOpen, setIsDeleteProfileModalOpen] = React.useState(false)
 
     React.useEffect( () => { 
         console.log('ProfileModal::useEffect')

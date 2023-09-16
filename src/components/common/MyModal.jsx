@@ -1,7 +1,8 @@
 import React from 'react'
 import { Modal, Box, Divider, Stack } from '@mui/material'
 
-export const MyModal = ({open, setOpen, children}) =>
+
+export const MyModal = ({open, setOpen, width = '350px', children}) =>
 {
 	return (
         <Modal open={open} onClose={() => setOpen(false)}>
@@ -9,7 +10,7 @@ export const MyModal = ({open, setOpen, children}) =>
                     position: 'absolute',
                     bgcolor: 'background.alternate',
                     maxHeight: '90vh',
-                    width: '350px',
+                    width: width,
                     top: '50%',
                     left: '50%',
                     transform: 'translate(-50%, -50%)',
@@ -24,23 +25,32 @@ export const MyModal = ({open, setOpen, children}) =>
 	);
 }
 
-export const MyModalHeader = ({children}) =>
+export const MyModalHeader = ({ children, divider = true }) =>
 {
     return (
         <Box height={'55px'}>
             <Stack sx={{flexDirection: 'row', height: '35px', padding: '10px 20px', alignItems: 'center'}}>
                 { children }
             </Stack>
-            <Divider />
+            {
+                divider 
+                ? <Divider />
+                : <></>
+            }
         </Box>
     );
 }
 
-export const MyModalFooter = ({children}) =>
+export const MyModalFooter = ({ children, divider = true }) =>
 {
     return (
         <Box height={'55px'}>
-            <Divider />
+            {
+                divider 
+                ? <Divider />
+                : <></>
+            }
+            
             <Stack sx={{flexDirection: 'row', height: '35px', padding: '10px 20px'}}>
                 { children }
             </Stack>
@@ -48,7 +58,7 @@ export const MyModalFooter = ({children}) =>
     );
 }
 
-export const MyModalBody = ({children}) =>
+export const MyModalBody = ({ children }) =>
 {
     return (
         <Box sx={{margin: 0, padding: 0, overflow: 'auto'}}>
