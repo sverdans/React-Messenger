@@ -6,8 +6,9 @@ import { LoadingButton } from '@mui/lab'
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera'
 
 import { MyModal, MyModalHeader, MyModalFooter, MyModalBody } from 'components/common'
-import { stringAvatar } from 'utils'
+import { DeleteProfileModal } from 'components/modals'
 import { user, contacts, chats } from 'store'
+import { stringAvatar } from 'utils'
 import socket from 'api'
 
 const ProfileModal = observer(({open, setOpen}) =>
@@ -20,6 +21,8 @@ const ProfileModal = observer(({open, setOpen}) =>
 	const [name, setName] = React.useState(profile.name)
 	const [surname, setSurname] = React.useState(profile.surname)
     const [profileImage, setProfileImage] = React.useState(profile.image)
+	const [isDeleteProfileModalOpen, setIsDeleteProfileModalOpen] = React.useState(false)
+    const [loadingSaveButton, setLoadingSaveButton] = React.useState(false)
 
     React.useEffect( () => { 
         console.log('ProfileModal::useEffect')
@@ -27,9 +30,6 @@ const ProfileModal = observer(({open, setOpen}) =>
         setSurname(profile.surname)
         setProfileImage(profile.image)
     }, [ profile ])
-
-    const [loadingSaveButton, setLoadingSaveButton] = React.useState(false)
-    const [loadingDeleteButton, setLoadingDeleteButton] = React.useState(false)
 
     const isSaveButtonDisable = () => {
         if (name !== profile.name ||
@@ -67,35 +67,6 @@ const ProfileModal = observer(({open, setOpen}) =>
                 data: { name, surname, user: profile }
             },
             onSaveServerResponse
-        )
-    }
-
-    const onDeleteServerResponse = (res) =>
-    {
-        console.log('[debug]', 'ProfileModal::onSaveServerResponse', res)
-        setLoadingDeleteButton(false)
-        
-        if (res.status === 200)
-        {
-            user.Clear()
-            chats.Clear()
-            contacts.Clear()
-        }
-        else
-        {
-            alert("server internal error: " + res.info)
-        }
-    }
-
-    const onDeleteButtonClick = () => 
-    {
-        setLoadingDeleteButton(true)
-        socket.emit('message', 
-            { 
-                event: 'DeleteProfile',
-                data: { user: profile }
-            },
-            onDeleteServerResponse
         )
     }
 
@@ -155,15 +126,14 @@ const ProfileModal = observer(({open, setOpen}) =>
             </MyModalBody>
 
             <MyModalFooter>
-                <LoadingButton loading={loadingDeleteButton}
-                    color='error' sx={{ fontWeight: 'bold'}}
-                    onClick={() => { onDeleteButtonClick() }}>
+                <Button color='error' sx={{ fontWeight: 'bold'}}
+                    onClick={() => { setIsDeleteProfileModalOpen(true) }}>
                     Delete account
-                </LoadingButton>
+                </Button>
 
-                <LoadingButton loading={loadingSaveButton} 
+                <LoadingButton color='success' sx={{ fontWeight: 'bold', marginLeft: 'auto'}}  
+                    loading={loadingSaveButton}
                     disabled={isSaveButtonDisable()}
-                    color='success' sx={{ fontWeight: 'bold', marginLeft: 'auto'}}
                     onClick={() => { onSaveButtonClick() }}>
                     Save
                 </LoadingButton>
@@ -174,6 +144,11 @@ const ProfileModal = observer(({open, setOpen}) =>
                 </Button>
             </MyModalFooter>
 
+            <DeleteProfileModal 
+                open={isDeleteProfileModalOpen}
+                setOpen={setIsDeleteProfileModalOpen}
+                profile={profile}/>
+                
         </MyModal>
 	);
 })

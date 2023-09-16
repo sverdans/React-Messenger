@@ -2,10 +2,8 @@ import moment from 'moment'
 
 export const getDate = (isoDate) => 
 {
-    const now = moment()
     const date = moment(isoDate, true)
-
-    const diffDays = date.diff(now, 'days');
+    const diffDays = date.diff(moment(), 'days');
 
     if (diffDays < 1)
     {

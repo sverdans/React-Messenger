@@ -5,7 +5,7 @@ export const MyModal = ({open, setOpen, children}) =>
 {
 	return (
         <Modal open={open} onClose={() => setOpen(false)}>
-            <Stack className="modal-wrapper" sx={{
+            <Stack sx={{
                     position: 'absolute',
                     bgcolor: 'background.alternate',
                     maxHeight: '90vh',
