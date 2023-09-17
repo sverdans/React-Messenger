@@ -3,11 +3,11 @@ import moment from 'moment'
 export const getDate = (isoDate) => 
 {
     const date = moment(isoDate, true)
-    const diffDays = date.diff(moment(), 'days');
+    const diffDays = date.diff(moment(), 'days')
 
-    if (diffDays < 1)
+    if (date.isSame(moment(), 'day'))
     {
-        return date.format("HH:MM")
+        return date.format("HH:mm")
     }
 
     if (diffDays < 7)
@@ -20,20 +20,18 @@ export const getDate = (isoDate) =>
 
 export const getMessageTime = (isoDate) => 
 {
-    return moment(isoDate, true).format("HH:MM")
+    return moment(isoDate, true).format("HH:mm")
 }
 
 export const getChatDate = (isoDate) =>
 {
     const date = moment(isoDate, true)
-    const diffYears = date.diff(moment(), 'years')
 
-    if (diffYears > 0)
+    if (date.isSame(moment(), 'years'))
     {
-        return date.format("MMMM D, YYYY")
+        return date.format("MMMM D")
     }
-
-    return date.format("MMMM D")
+    return date.format("MMMM D, YYYY")
 }
 
 export const stringToColor = (string) => 
