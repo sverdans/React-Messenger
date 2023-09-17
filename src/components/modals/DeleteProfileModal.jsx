@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Button, Typography, Box } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
 
-import { MyModal, MyModalFooter } from 'components/common'
+import { MyModal, MyModalFooter, MyModalHeader, MyModalBody } from 'components/common'
 
 import { user, contacts, chats } from 'store'
 import socket from 'api'
@@ -46,11 +46,19 @@ const DeleteProfileModal = ({ open, setOpen, profile }) =>
 
 	return (
         <MyModal open={open} setOpen={setOpen} width={'300px'}>
-            <Box sx={{margin: '35px 15px 0px 15px', padding: 0, overflow: 'auto'}}>
-                <Typography color="text.primary" sx={{ alignSelf: 'start' }}>
-                    Are you sure you want to delete profile?
-                </Typography>
-            </Box>
+            <MyModalHeader divider={false}>
+                <Typography color="text.primary" fontWeight="bold" fontSize="20px" sx={{alignSelf: 'center'}}>
+                    Delete an account?
+                </Typography> 
+            </MyModalHeader>
+            
+            <MyModalBody>
+                <Box sx={{margin: '0px 20px 0px 20px', padding: 0, overflow: 'auto'}}>
+                    <Typography color="text.primary" sx={{ alignSelf: 'start' }}>
+                        It will be impossible to restore it
+                    </Typography>
+                </Box>
+            </MyModalBody>
 
             <MyModalFooter divider={false}>
                 <Button sx={{ fontWeight: 'bold', marginLeft: 'auto' }} 
