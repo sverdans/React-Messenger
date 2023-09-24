@@ -11,7 +11,8 @@ import {
 	TextField,
 	Link,
 } from '@mui/material'
-import { Visibility,VisibilityOff }  from '@mui/icons-material'
+import { Visibility, VisibilityOff } from '@mui/icons-material'
+
 import { LoadingButton } from '@mui/lab'
 import { useNavigate } from 'react-router-dom'
 
@@ -71,7 +72,7 @@ const SignUp = () =>
 					Sign Up
 				</Typography>
 
-				<TextField 
+				<TextField
 					label="Email" 
 					variant="standard"
 					style={{ marginTop: 10 }} 
@@ -118,6 +119,7 @@ const SignUp = () =>
 									}
 								</IconButton>
 							</InputAdornment>
+
 						}
 						value={password}
 						onChange={e => setPassword(e.target.value)}/>
@@ -136,7 +138,6 @@ const SignUp = () =>
 				</Link>
 			</Stack>
 		</Box>
-		
 	);
 }
 

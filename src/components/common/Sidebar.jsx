@@ -1,5 +1,5 @@
 import React from 'react'
-import { Stack, IconButton } from '@mui/material'
+import { Stack, IconButton, Tooltip } from '@mui/material'
 
 import GroupIcon from '@mui/icons-material/Group'
 import PersonIcon from '@mui/icons-material/Person'
@@ -17,18 +17,25 @@ const Sidebar = () =>
 			backgroundColor: 'background.alternate',
 			alignItems: 'center', justifyContent: 'center',
 			borderRight: 1, borderColor: 'background.main'}}>
-			<IconButton onClick={() => {setIsProfileModalOpen(true)}}>
-				<PersonIcon sx={{color: "text.secondary"}} />
-			</IconButton>
 			
-			<IconButton onClick={() => {setIsContactModalOpen(true)}}>
-				<GroupIcon sx={{color: "text.secondary"}} />
-			</IconButton>
+			<Tooltip title="Profile" placement="right" enterDelay={600} leaveDelay={100}>
+				<IconButton onClick={() => {setIsProfileModalOpen(true)}}>
+					<PersonIcon sx={{color: "text.secondary"}} />
+				</IconButton>
+			</Tooltip>
 			
-			<IconButton>
-				<SettingsIcon sx={{color: "text.secondary"}} />
-			</IconButton>
+			<Tooltip title="Contacts" placement="right" enterDelay={600} leaveDelay={100}>
+				<IconButton onClick={() => {setIsContactModalOpen(true)}}>
+					<GroupIcon sx={{color: "text.secondary"}} />
+				</IconButton>
+			</Tooltip>
 
+			<Tooltip title="Settings" placement="right" enterDelay={600} leaveDelay={100}>
+				<IconButton>
+					<SettingsIcon sx={{color: "text.secondary"}} />
+				</IconButton>
+			</Tooltip>
+			
 			<ContactsModal open={isContactModalOpen} setOpen={setIsContactModalOpen}/>
 			<ProfileModal open={isProfileModalOpen} setOpen={setIsProfileModalOpen}/>
 		</Stack>
